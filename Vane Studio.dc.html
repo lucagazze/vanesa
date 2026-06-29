@@ -13,17 +13,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Jost',sans-serif;color:#4a3f44;background:#f6eef0}
+  body{font-family:'Jost',sans-serif;color:#4a3f44;background:#f6eef0;scroll-behavior:smooth}
   ::selection{background:#d9b8c4;color:#2e2428}
   @keyframes floatup{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-  @keyframes kbg{0%{transform:scale(1.02) translate(0,0)}100%{transform:scale(1.14) translate(-2%,-2%)}}
-  @keyframes meshmove{0%{transform:translate(-8%,-6%) rotate(0deg)}50%{transform:translate(6%,4%) rotate(8deg)}100%{transform:translate(-8%,-6%) rotate(0deg)}}
-  @keyframes meshmove2{0%{transform:translate(6%,8%) scale(1.1)}50%{transform:translate(-6%,-4%) scale(1.25)}100%{transform:translate(6%,8%) scale(1.1)}}
-  @keyframes hueshift{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(18deg)}}
-  @keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-5%,-5%)}30%{transform:translate(3%,-8%)}50%{transform:translate(-7%,4%)}70%{transform:translate(5%,6%)}90%{transform:translate(-3%,-2%)}}
   @keyframes shimmer{0%,100%{opacity:.5}50%{opacity:.9}}
   .rev{animation:floatup .9s cubic-bezier(.16,.84,.44,1) both}
   a{color:inherit;text-decoration:none}
+  .card{background:#fff;border-radius:12px;border:1px solid rgba(120,80,95,.08);box-shadow:0 15px 45px -25px rgba(90,61,74,.3);transition:all .3s ease;display:flex;flex-direction:column;overflow:hidden}
+  .card:hover{transform:translateY(-6px);box-shadow:0 20px 50px -20px rgba(90,61,74,.4)}
 </style>
 </helmet>
 
@@ -31,116 +28,177 @@
 
   <!-- NAV -->
   <header style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,64px);background:rgba(246,238,240,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(120,80,95,.1)">
-    <a href="#top" style="font-family:'Cormorant Garamond',serif;font-size:26px;letter-spacing:5px;font-weight:600;color:#5a3d4a">VANE</a>
+    <a href="#top" style="font-family:'Cormorant Garamond',serif;font-size:26px;letter-spacing:5px;font-weight:600;color:#5a3d4a">VANE - UNA</a>
     <nav style="display:flex;gap:clamp(16px,3vw,40px);align-items:center;font-size:13px;letter-spacing:1.5px;text-transform:uppercase">
-      <a href="#tienda" style="color:#7a5c66">Tienda</a>
-      <a href="#yoga" style="color:#7a5c66">Yoga</a>
-      <a href="#sobre" style="color:#7a5c66">Sobre mí</a>
+      <a href="#opciones" style="color:#7a5c66">Opciones</a>
+      <a href="#video" style="color:#7a5c66">Video</a>
+      <a href="#capsulas" style="color:#7a5c66">Cápsulas</a>
       <a href="{{ waNav }}" target="_blank" style="display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:#5a3d4a;color:#f6eef0;border-radius:40px;font-size:12px">Pedir</a>
     </nav>
   </header>
 
-  <!-- HERO -->
-  <section id="top" style="position:relative;min-height:92vh;display:flex;align-items:flex-end;overflow:hidden;background:#241a20">
-    <!-- animated mesh-gradient base (the "video") -->
-    <div style="position:absolute;inset:-20%;animation:hueshift 16s ease-in-out infinite alternate">
-      <div style="position:absolute;inset:0;background:radial-gradient(60% 55% at 25% 30%,#f4c9d6 0%,rgba(244,201,214,0) 60%);animation:meshmove 22s ease-in-out infinite"></div>
-      <div style="position:absolute;inset:0;background:radial-gradient(55% 50% at 78% 22%,#e7b7d9 0%,rgba(231,183,217,0) 58%);animation:meshmove2 26s ease-in-out infinite"></div>
-      <div style="position:absolute;inset:0;background:radial-gradient(70% 60% at 65% 80%,#c9a6dd 0%,rgba(201,166,221,0) 62%);animation:meshmove 30s ease-in-out infinite reverse"></div>
-      <div style="position:absolute;inset:0;background:radial-gradient(60% 55% at 15% 85%,#f1d9b8 0%,rgba(241,217,184,0) 60%);animation:meshmove2 24s ease-in-out infinite reverse"></div>
+  <!-- HERO (Tu espacio...) -->
+  <section id="top" style="position:relative;padding:clamp(60px,10vh,120px) clamp(20px,5vw,64px);background:linear-gradient(135deg, #f6eef0 0%, #efe2e5 100%);display:flex;align-items:center;justify-content:center;min-height:85vh">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,350px),1fr));gap:clamp(32px,6vw,72px);align-items:center;max-width:1180px;width:100%">
+      
+      <!-- Text Column -->
+      <div class="rev" style="max-width:580px">
+        <p style="font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#b07d8e;margin-bottom:18px">Tu espacio</p>
+        <h1 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(38px,6vw,68px);line-height:1.06;color:#5a3d4a;margin-bottom:24px">
+          AQUÍ te entendemos, <br><em style="font-style:italic">escuchamos y acompañamos</em>
+        </h1>
+        <p style="font-size:clamp(15px,2vw,17px);font-weight:300;color:#6b535d;line-height:1.7;margin-bottom:32px">
+          Un rincón creado para conectar con vos misma a través del movimiento, la respiración y el bienestar diario. Te acompañamos en cada etapa con indumentaria cómoda, herramientas de organización y una hermosa comunidad.
+        </p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <a href="#opciones" style="padding:15px 32px;background:#5a3d4a;color:#f6eef0;border-radius:40px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase">Ver opciones</a>
+          <a href="#capsulas" style="padding:15px 32px;background:rgba(255,255,255,.85);color:#5a3d4a;border-radius:40px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid rgba(90,61,74,.2)">Colección</a>
+        </div>
+      </div>
+
+      <!-- Photo Column -->
+      <div class="rev" style="display:flex;justify-content:center;position:relative">
+        <!-- decorative background shape -->
+        <div style="position:absolute;inset:-15px;background:radial-gradient(circle, #e9d2dc 0%, rgba(233,210,220,0) 70%);z-index:0;animation:shimmer 8s ease-in-out infinite"></div>
+        <div style="position:relative;z-index:1;width:100%;max-width:440px;aspect-ratio:4/5;border-radius:16px;overflow:hidden;box-shadow:0 25px 60px -20px rgba(90,61,74,.45);border:4px solid #fff">
+          <img src="img/hero2.jpeg" alt="Tu Espacio Vane" style="width:100%;height:100%;object-fit:cover;object-position:center 35%">
+        </div>
+      </div>
+
     </div>
-    <!-- soft drifting silk veils for depth -->
-    <div style="position:absolute;inset:-20%;background:conic-gradient(from 200deg at 60% 40%,rgba(255,255,255,.0),rgba(255,246,238,.35),rgba(255,255,255,0) 40%);mix-blend-mode:soft-light;animation:meshmove 28s ease-in-out infinite"></div>
-    <!-- soft light bloom -->
-    <div style="position:absolute;top:-10%;right:-5%;width:55%;height:70%;background:radial-gradient(circle,rgba(255,244,230,.7) 0%,rgba(255,244,230,0) 70%);animation:shimmer 7s ease-in-out infinite"></div>
-    <!-- film grain -->
-    <div style="position:absolute;inset:-30%;opacity:.07;mix-blend-mode:overlay;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);animation:grain .5s steps(2) infinite"></div>
-    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(60,40,50,.25) 0%,rgba(90,61,74,.05) 38%,rgba(214,180,196,.6) 100%)"></div>
-    <div class="rev" style="position:relative;padding:clamp(28px,6vw,80px);max-width:760px">
-      <p style="font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#f6eef0;margin-bottom:18px;opacity:.9">Indumentaria & movimiento</p>
-      <h1 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(44px,8vw,96px);line-height:.96;color:#fff;text-shadow:0 2px 30px rgba(80,50,62,.25)">Vestite para<br><em style="font-style:italic">moverte liviana</em></h1>
-      <p style="margin-top:22px;font-size:clamp(15px,2vw,18px);font-weight:300;color:#fff;max-width:460px;line-height:1.6">Prendas de yoga y athleisure seleccionadas a mano. Pedí lo tuyo por WhatsApp en un toque.</p>
-      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:30px">
-        <a href="#tienda" style="padding:15px 32px;background:#5a3d4a;color:#f6eef0;border-radius:40px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase">Ver tienda</a>
-        <a href="#yoga" style="padding:15px 32px;background:rgba(255,255,255,.85);color:#5a3d4a;border-radius:40px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase">Clases de yoga</a>
+  </section>
+
+  <!-- ELEGÍ TU OPCIÓN (Cards) -->
+  <section id="opciones" style="padding:clamp(60px,9vw,110px) clamp(20px,5vw,64px);background:#fff">
+    <div style="text-align:center;max-width:560px;margin:0 auto 60px">
+      <p style="font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#b07d8e;margin-bottom:14px">Opciones de encuentro</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(34px,5vw,52px);color:#5a3d4a;line-height:1.02">Elegí Tu Opción</h2>
+      <p style="margin-top:16px;font-weight:300;color:#8a7178;line-height:1.6">Diferentes maneras de transitar este camino juntas, pensadas para adaptarse a tu día a día.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(20px,3vw,36px);max-width:1180px;margin:0 auto">
+      
+      <!-- Card 1: Entrenamiento -->
+      <article class="card" style="padding:40px 30px;text-align:center;align-items:center">
+        <div style="width:64px;height:64px;border-radius:50%;background:#faebee;display:flex;align-items:center;justify-content:center;margin-bottom:24px;color:#cc2b3d">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#5a3d4a;margin-bottom:14px">Entrenamiento</h3>
+        <p style="font-size:14.5px;font-weight:300;color:#7a5c66;line-height:1.6;margin-bottom:30px;flex:1">
+          Clases gratuitas de yoga, estiramiento y bienestar en mi canal de YouTube. Empezá a moverte a tu propio ritmo.
+        </p>
+        <a href="{{ ytLink }}" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:12px 32px;background:#cc2b3d;color:#fff;border-radius:40px;font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:500">
+          YouTube
+        </a>
+      </article>
+
+      <!-- Card 2: Organizá -->
+      <article class="card" style="padding:40px 30px;text-align:center;align-items:center">
+        <div style="width:64px;height:64px;border-radius:50%;background:#fcf1e8;display:flex;align-items:center;justify-content:center;margin-bottom:24px;color:#d97706">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#5a3d4a;margin-bottom:14px">Planificación</h3>
+        <p style="font-size:14.5px;font-weight:300;color:#7a5c66;line-height:1.6;margin-bottom:30px;flex:1">
+          Organizá tu día, tu semana y tu mes. Pedime por WhatsApp nuestro Planner digital gratuito listo para descargar.
+        </p>
+        <a href="{{ waPlanner }}" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:12px 32px;background:#d97706;color:#fff;border-radius:40px;font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:500">
+          Descargable
+        </a>
+      </article>
+
+      <!-- Card 3: Comunidad-Una -->
+      <article class="card" style="padding:40px 30px;text-align:center;align-items:center">
+        <div style="width:64px;height:64px;border-radius:50%;background:#e6f4ea;display:flex;align-items:center;justify-content:center;margin-bottom:24px;color:#25804f">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.043zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#5a3d4a;margin-bottom:14px">Comunidad-Una</h3>
+        <p style="font-size:14.5px;font-weight:300;color:#7a5c66;line-height:1.6;margin-bottom:30px;flex:1">
+          Sumate a nuestro grupo de WhatsApp. Un círculo seguro de mamás para compartir, charlar y sostenernos.
+        </p>
+        <a href="{{ waNav }}" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:12px 32px;background:#25804f;color:#fff;border-radius:40px;font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:500">
+          WhatsApp
+        </a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- VIDEO INSTITUCIONAL -->
+  <section id="video" style="padding:clamp(60px,8vw,100px) clamp(20px,5vw,64px);background:linear-gradient(180deg,#fff 0%,#f6eef0 100%)">
+    <div style="max-width:960px;margin:0 auto;text-align:center">
+      <p style="font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#b07d8e;margin-bottom:14px">Conocenos</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(30px,4.5vw,46px);color:#5a3d4a;margin-bottom:36px;line-height:1.1">
+        Video Institucional de Vane
+      </h2>
+      <div style="position:relative;border-radius:16px;overflow:hidden;box-shadow:0 30px 60px -25px rgba(90,61,74,.35);border:5px solid #fff;background:#000;aspect-ratio:16/9;width:100%">
+        <video src="uploads/WhatsApp Video 2026-06-22 at 12.26.39 PM.mp4" controls style="width:100%;height:100%;object-fit:cover" poster="img/hero1.jpeg"></video>
       </div>
     </div>
   </section>
 
-  <!-- MARQUEE -->
-  <div style="background:#5a3d4a;color:#e8cdd8;overflow:hidden;white-space:nowrap;padding:13px 0;font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:3px">
-    <div style="display:inline-block">&nbsp;ENVÍOS A TODO EL PAÍS ✦ PEDIDOS POR WHATSAPP ✦ YOGA PARA MAMÁS ✦ PRENDAS PREMIUM ✦ ENVÍOS A TODO EL PAÍS ✦ PEDIDOS POR WHATSAPP ✦ YOGA PARA MAMÁS ✦ PRENDAS PREMIUM ✦</div>
-  </div>
-
-  <!-- TIENDA -->
-  <section id="tienda" style="padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px);background:#f6eef0">
-    <div style="text-align:center;max-width:560px;margin:0 auto 56px">
-      <p style="font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#b07d8e;margin-bottom:14px">La colección</p>
-      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(34px,5vw,56px);color:#5a3d4a;line-height:1.02">Elegí tus prendas</h2>
-      <p style="margin-top:16px;font-weight:300;color:#8a7178;line-height:1.6">Tocá <strong style="font-weight:500;color:#5a3d4a">Pedir por WhatsApp</strong> en el producto que te guste y te respondo al toque para coordinar el pago y el envío.</p>
+  <!-- CÁPSULAS -->
+  <section id="capsulas" style="padding:clamp(60px,9vw,110px) clamp(20px,5vw,64px);background:#f6eef0">
+    <div style="text-align:center;max-width:600px;margin:0 auto 48px">
+      <p style="font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#b07d8e;margin-bottom:14px">Movete, respirá, volvé a vos</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(34px,5vw,52px);color:#5a3d4a;line-height:1.02;text-transform:uppercase;letter-spacing:2px">Cápsulas</h2>
+      <p style="margin-top:16px;font-weight:300;color:#8a7178;line-height:1.6">Seleccioná cada una de nuestras propuestas para ver la colección disponible o enterarte de próximos lanzamientos.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:clamp(18px,2.5vw,32px);max-width:1180px;margin:0 auto">
-      <sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
-        <article style="background:#fff;border-radius:6px;overflow:hidden;border:1px solid rgba(120,80,95,.08);box-shadow:0 10px 40px -28px rgba(90,61,74,.5);display:flex;flex-direction:column">
-          <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:{{ p.bg }}">
-            <img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;object-position:{{ p.pos }}">
-            <span style="position:absolute;top:12px;left:12px;background:rgba(246,238,240,.92);color:#5a3d4a;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:30px">{{ p.tag }}</span>
-          </div>
-          <div style="padding:20px 20px 22px;display:flex;flex-direction:column;flex:1">
-            <h3 style="font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;color:#3d2c33;line-height:1.1">{{ p.name }}</h3>
-            <p style="font-size:13.5px;font-weight:300;color:#8a7178;margin-top:6px;line-height:1.5;flex:1">{{ p.desc }}</p>
-            <div style="display:flex;align-items:baseline;gap:10px;margin-top:16px">
-              <span style="font-size:21px;font-weight:500;color:#5a3d4a">{{ p.price }}</span>
-              <span style="font-size:13px;font-weight:300;color:#b8a3aa">{{ p.note }}</span>
-            </div>
-            <a href="{{ p.wa }}" target="_blank" style="margin-top:16px;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px;background:#25804f;color:#fff;border-radius:40px;font-size:13px;letter-spacing:1px;text-transform:uppercase;transition:transform .2s" style-hover="transform:translateY(-2px)">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.043zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-              Pedir por WhatsApp
-            </a>
-          </div>
-        </article>
-      </sc-for>
+    <!-- Category filter buttons -->
+    <div style="max-width:800px;margin:0 auto 48px;display:flex;flex-direction:column;align-items:center;gap:16px">
+      <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;width:100%">
+        <button onclick="{{ setIndumentaria }}" style="{{ styleIndumentaria }}">Indumentaria</button>
+        <button onclick="{{ setUna }}" style="{{ styleUna }}">UNA</button>
+        <button onclick="{{ setSkinCare }}" style="{{ styleSkinCare }}">Skin Care</button>
+      </div>
+      <div style="display:flex;justify-content:center;width:100%">
+        <button onclick="{{ setSuplementos }}" style="{{ styleSuplementos }}">Suplementos</button>
+      </div>
     </div>
-  </section>
 
-  <!-- YOGA / YOUTUBE -->
-  <section id="yoga" style="position:relative;padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px);background:linear-gradient(160deg,#e9d2dc 0%,#dcc4d6 55%,#cdb6d4 100%);overflow:hidden">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(32px,5vw,72px);align-items:center;max-width:1180px;margin:0 auto">
-      <div>
-        <p style="font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#7a4f63;margin-bottom:16px">Yoga para mamás</p>
-        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(34px,5vw,58px);color:#4a2e3a;line-height:1.02">Movete, respirá,<br><em style="font-style:italic">volvé a vos</em></h2>
-        <p style="margin-top:20px;font-weight:300;color:#5e4350;line-height:1.7;max-width:460px">Clases pensadas para mamás reales: poco tiempo, mucho cansancio y ganas de reconectar con el cuerpo. Practicá conmigo desde casa, a tu ritmo, con o sin bebé al lado.</p>
-        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:30px">
-          <a href="{{ ytLink }}" target="_blank" style="display:inline-flex;align-items:center;gap:10px;padding:15px 28px;background:#cc2b3d;color:#fff;border-radius:40px;font-size:13px;letter-spacing:1px;text-transform:uppercase">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            Ver mi canal
+    <!-- Dynamic Section: Product grid or Placeholder -->
+    <div style="max-width:1180px;margin:0 auto">
+      
+      <!-- Render grid of products if active capsule has items -->
+      <sc-if value="{{ hasProducts }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:clamp(18px,2.5vw,32px)">
+          <sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
+            <article style="background:#fff;border-radius:12px;overflow:hidden;border:1px solid rgba(120,80,95,.08);box-shadow:0 10px 40px -28px rgba(90,61,74,.5);display:flex;flex-direction:column">
+              <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:{{ p.bg }}">
+                <img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;object-position:{{ p.pos }}">
+                <span style="position:absolute;top:12px;left:12px;background:rgba(246,238,240,.92);color:#5a3d4a;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:30px">{{ p.tag }}</span>
+              </div>
+              <div style="padding:22px 20px 24px;display:flex;flex-direction:column;flex:1">
+                <h3 style="font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;color:#3d2c33;line-height:1.1">{{ p.name }}</h3>
+                <p style="font-size:13.5px;font-weight:300;color:#8a7178;margin-top:6px;line-height:1.5;flex:1">{{ p.desc }}</p>
+                <div style="display:flex;align-items:baseline;gap:10px;margin-top:16px">
+                  <span style="font-size:21px;font-weight:500;color:#5a3d4a">{{ p.price }}</span>
+                  <span style="font-size:13px;font-weight:300;color:#b8a3aa">{{ p.note }}</span>
+                </div>
+                <a href="{{ p.wa }}" target="_blank" style="margin-top:18px;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px;background:#25804f;color:#fff;border-radius:40px;font-size:13px;letter-spacing:1px;text-transform:uppercase;transition:transform .2s" style-hover="transform:translateY(-2px)">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.043zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                  Pedir por WhatsApp
+                </a>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <!-- Render placeholder if active capsule is empty -->
+      <sc-if value="{{ noProducts }}">
+        <div style="background:#fff;border-radius:16px;border:1px solid rgba(120,80,95,.08);box-shadow:0 20px 50px -25px rgba(90,61,74,.25);padding:60px 40px;text-align:center;max-width:700px;margin:0 auto">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:#5a3d4a;margin-bottom:18px">{{ emptyTitle }}</h3>
+          <p style="font-size:16px;font-weight:300;color:#7a5c66;line-height:1.7;margin-bottom:32px;max-width:540px;margin-left:auto;margin-right:auto">
+            {{ emptyMessage }}
+          </p>
+          <a href="{{ waEmptyLink }}" target="_blank" style="display:inline-flex;align-items:center;gap:10px;padding:15px 36px;background:#25804f;color:#fff;border-radius:40px;font-size:13.5px;letter-spacing:1px;text-transform:uppercase;font-weight:500">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.043zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            Consultar por WhatsApp
           </a>
-          <a href="{{ waYoga }}" target="_blank" style="display:inline-flex;align-items:center;gap:9px;padding:15px 28px;background:rgba(255,255,255,.78);color:#5a3d4a;border-radius:40px;font-size:13px;letter-spacing:1px;text-transform:uppercase">Clases 1 a 1</a>
         </div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-        <img src="img/hero5.jpeg" alt="Yoga" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:6px;grid-row:span 2;object-position:center 30%">
-        <img src="img/hero4.jpeg" alt="Yoga" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px">
-        <img src="img/hero1.jpeg" alt="Yoga" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px">
-      </div>
-    </div>
-  </section>
+      </sc-if>
 
-  <!-- SOBRE MI -->
-  <section id="sobre" style="padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px);background:#f6eef0">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(32px,5vw,64px);align-items:center;max-width:1080px;margin:0 auto">
-      <img src="img/hero2.jpeg" alt="Vane" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:6px;object-position:center 35%">
-      <div>
-        <p style="font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#b07d8e;margin-bottom:16px">Hola, soy Vane</p>
-        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(30px,4.5vw,50px);color:#5a3d4a;line-height:1.05">Yoga, maternidad<br>y prendas que abrazan</h2>
-        <p style="margin-top:20px;font-weight:300;color:#8a7178;line-height:1.7">Hace años que practico y enseño yoga, y siempre busqué ropa cómoda, linda y que aguante el ritmo de ser mamá. Así nació este espacio: prendas elegidas con amor + un lugar para movernos juntas.</p>
-        <div style="display:flex;gap:36px;margin-top:32px;flex-wrap:wrap">
-          <div><div style="font-family:'Cormorant Garamond',serif;font-size:38px;color:#5a3d4a">+8</div><div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#a98c95">años de yoga</div></div>
-          <div><div style="font-family:'Cormorant Garamond',serif;font-size:38px;color:#5a3d4a">+200</div><div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#a98c95">mamás en clase</div></div>
-          <div><div style="font-family:'Cormorant Garamond',serif;font-size:38px;color:#5a3d4a">100%</div><div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#a98c95">hecho con amor</div></div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -161,12 +219,13 @@
   <!-- FOOTER -->
   <footer style="background:#3d2c33;color:#d9b8c4;padding:clamp(40px,6vw,64px) clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:center">
     <div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:28px;letter-spacing:5px;color:#fff">VANE</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:28px;letter-spacing:5px;color:#fff">VANE - UNA</div>
       <p style="font-size:13px;font-weight:300;margin-top:6px;color:#b794a4">Indumentaria & yoga · hecho con amor</p>
     </div>
     <div style="display:flex;gap:24px;font-size:13px;letter-spacing:1px;text-transform:uppercase">
-      <a href="#tienda">Tienda</a>
-      <a href="#yoga">Yoga</a>
+      <a href="#opciones">Opciones</a>
+      <a href="#video">Video</a>
+      <a href="#capsulas">Cápsulas</a>
       <a href="{{ ytLink }}" target="_blank">YouTube</a>
       <a href="{{ waNav }}" target="_blank">WhatsApp</a>
     </div>
@@ -181,30 +240,84 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900},&quot;phone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5491100000000&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;youtube&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://youtube.com&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { category: 'indumentaria' };
+  }
+
   renderVals() {
+    const activeCat = this.state.category || 'indumentaria';
     const phone = (this.props.phone ?? "5491100000000").replace(/[^0-9]/g, "");
     const wa = (txt) => `https://wa.me/${phone}?text=${encodeURIComponent(txt)}`;
     const yt = this.props.youtube ?? "https://youtube.com";
 
+    const setIndumentaria = () => this.setState({ category: 'indumentaria' });
+    const setUna = () => this.setState({ category: 'una' });
+    const setSkinCare = () => this.setState({ category: 'skincare' });
+    const setSuplementos = () => this.setState({ category: 'suplementos' });
+
+    const activeColor = "#5a3d4a";
+    const inactiveColor = "transparent";
+    const activeText = "#f6eef0";
+    const inactiveText = "#5a3d4a";
+
+    const styleIndumentaria = `background: ${activeCat === 'indumentaria' ? activeColor : inactiveColor}; color: ${activeCat === 'indumentaria' ? activeText : inactiveText}; border: 1px solid #5a3d4a; padding: 12px 28px; border-radius: 40px; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; outline: none;`;
+    const styleUna = `background: ${activeCat === 'una' ? activeColor : inactiveColor}; color: ${activeCat === 'una' ? activeText : inactiveText}; border: 1px solid #5a3d4a; padding: 12px 28px; border-radius: 40px; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; outline: none;`;
+    const styleSkinCare = `background: ${activeCat === 'skincare' ? activeColor : inactiveColor}; color: ${activeCat === 'skincare' ? activeText : inactiveText}; border: 1px solid #5a3d4a; padding: 12px 28px; border-radius: 40px; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; outline: none;`;
+    const styleSuplementos = `background: ${activeCat === 'suplementos' ? activeColor : inactiveColor}; color: ${activeCat === 'suplementos' ? activeText : inactiveText}; border: 1px solid #5a3d4a; padding: 12px 28px; border-radius: 40px; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; outline: none;`;
+
     const raw = [
-      { name: "Conjunto Alo Blanco", tag: "Más vendido", price: "$48.000", note: "top + calza", desc: "Set de top deportivo y calza tiro alto. Tela suave, segunda piel, ideal para yoga y día a día.", img: "img/conjunto.jpeg", bg: "#efe7e0", pos: "center 20%" },
-      { name: "Gorra Alo Negra", tag: "Nuevo", price: "$22.000", note: "unisex", desc: "Gorra de algodón con bordado frontal. El detalle que completa cualquier look athleisure.", img: "img/gorra.jpeg", bg: "#e7e4e2", pos: "center" },
-      { name: "Medias Alo (pack x2)", tag: "Pack", price: "$14.000", note: "talle único", desc: "Par de medias media caña de algodón con detalle de rayas. Suaves y con buena sujeción.", img: "img/medias.jpeg", bg: "#eceae8", pos: "center 30%" },
-      { name: "Calza Tiro Alto", tag: "Esencial", price: "$32.000", note: "varios talles", desc: "Calza de compresión suave, tiro alto y cintura ancha que no se baja. Tu base para entrenar.", img: "img/conjunto.jpeg", bg: "#efe7e0", pos: "center 62%" },
-      { name: "Top Deportivo", tag: "Esencial", price: "$24.000", note: "varios talles", desc: "Top con buena sujeción y espalda diseñada para moverte libre. Combinalo con tu calza favorita.", img: "img/conjunto.jpeg", bg: "#efe7e0", pos: "center 22%" },
-      { name: "Look Completo", tag: "Combo", price: "$78.000", note: "conjunto + gorra + medias", desc: "Llevá todo junto y ahorrá: conjunto + gorra + pack de medias en un solo pedido.", img: "img/hero4.jpeg", bg: "#2a2326", pos: "center 30%" },
+      { name: "Conjunto Alo Blanco", tag: "Más vendido", price: "$48.000", note: "top + calza", desc: "Set de top deportivo y calza tiro alto. Tela suave, segunda piel, ideal para yoga y día a día.", img: "img/conjunto.jpeg", bg: "#efe7e0", pos: "center 20%", category: "indumentaria" },
+      { name: "Gorra Alo Negra", tag: "Nuevo", price: "$22.000", note: "unisex", desc: "Gorra de algodón con bordado frontal. El detalle que completa cualquier look athleisure.", img: "img/gorra.jpeg", bg: "#e7e4e2", pos: "center", category: "indumentaria" },
+      { name: "Medias Alo (pack x2)", tag: "Pack", price: "$14.000", note: "talle único", desc: "Par de medias media caña de algodón con detalle de rayas. Suaves y con buena sujeción.", img: "img/medias.jpeg", bg: "#eceae8", pos: "center 30%", category: "indumentaria" },
+      { name: "Calza Tiro Alto", tag: "Esencial", price: "$32.000", note: "varios talles", desc: "Calza de compresión suave, tiro alto y cintura ancha que no se baja. Tu base para entrenar.", img: "img/conjunto.jpeg", bg: "#efe7e0", pos: "center 62%", category: "indumentaria" },
+      { name: "Top Deportivo", tag: "Esencial", price: "$24.000", note: "varios talles", desc: "Top con buena sujeción y espalda diseñada para moverte libre. Combinalo con tu calza favorita.", img: "img/conjunto.jpeg", bg: "#efe7e0", pos: "center 22%", category: "indumentaria" },
+      { name: "Look Completo", tag: "Combo", price: "$78.000", note: "conjunto + gorra + medias", desc: "Llevá todo junto y ahorrá: conjunto + gorra + pack de medias en un solo pedido.", img: "img/hero4.jpeg", bg: "#2a2326", pos: "center 30%", category: "indumentaria" },
     ];
 
-    const products = raw.map(p => ({
+    const allProducts = raw.map(p => ({
       ...p,
       wa: wa(`¡Hola Vane! 💕 Quiero pedir: ${p.name} (${p.price}). ¿Está disponible?`)
     }));
 
+    const products = allProducts.filter(p => p.category === activeCat);
+    const hasProducts = products.length > 0;
+    const noProducts = products.length === 0;
+
+    let emptyTitle = "";
+    let emptyMessage = "";
+    if (activeCat === 'una') {
+      emptyTitle = "Cápsula UNA";
+      emptyMessage = "Nuestro espacio exclusivo para conectar. Próximamente compartiremos prendas y elementos seleccionados para tu práctica diaria. Escribinos para reservar tu lugar.";
+    } else if (activeCat === 'skincare') {
+      emptyTitle = "Cápsula Skin Care";
+      emptyMessage = "Prendas y rutinas que cuidan tu piel. Estamos preparando una selección premium de cosmética consciente y accesorios de cuidado personal.";
+    } else if (activeCat === 'suplementos') {
+      emptyTitle = "Cápsula Suplementos";
+      emptyMessage = "Nutrición integral para tu movimiento diario. Muy pronto vas a encontrar suplementos y complementos naturales para acompañar tu alimentación.";
+    }
+
+    const waEmptyLink = wa(`¡Hola Vane! 💕 Me interesa saber más sobre la Cápsula: ${activeCat.toUpperCase()}. ¿Cuándo estará disponible?`);
+
     return {
       products,
+      hasProducts,
+      noProducts,
+      emptyTitle,
+      emptyMessage,
+      waEmptyLink,
       ytLink: yt,
       waNav: wa("¡Hola Vane! 💕 Quiero hacer un pedido."),
       waYoga: wa("¡Hola Vane! Me interesan las clases de yoga 🧘‍♀️"),
+      waPlanner: wa("¡Hola Vane! Me gustaría descargar el planner gratuito 📅"),
+      setIndumentaria,
+      setUna,
+      setSkinCare,
+      setSuplementos,
+      styleIndumentaria,
+      styleUna,
+      styleSkinCare,
+      styleSuplementos
     };
   }
 }

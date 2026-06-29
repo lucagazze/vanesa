@@ -46,6 +46,8 @@
   .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:clamp(32px,6vw,72px);align-items:center;max-width:1180px;width:100%;position:relative;z-index:1}
   .quienes-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:clamp(32px,5vw,64px);align-items:center;max-width:1080px;margin:0 auto;width:100%}
 
+  .hero-btn-container{display:flex;gap:14px;flex-wrap:nowrap;margin-top:30px}
+
   @media (max-width: 768px) {
     .desktop-nav{display:none !important}
     .mobile-menu-btn{display:block !important}
@@ -54,6 +56,9 @@
     .hero-text-col{text-align:center !important;max-width:100% !important}
     .hero-text-col div{justify-content:center !important}
     .quienes-grid{grid-template-columns:1fr;gap:40px}
+    
+    .hero-btn-container{justify-content:center !important;width:100%;gap:10px}
+    .hero-btn-container a{padding:12px 18px !important;font-size:11px !important;flex:1;text-align:center;max-width:160px}
   }
 </style>
 </helmet>
@@ -113,7 +118,7 @@
 
   <!-- ==================== PAGE: INICIO ==================== -->
   <sc-if value="{{ showInicio }}">
-    <!-- HERO -->
+    <!-- HERO (Fondo corregido sin costuras conic-gradient) -->
     <section id="top" style="position:relative;min-height:92vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#241a20;padding:clamp(60px,10vh,120px) clamp(20px,5vw,64px)">
       <div style="position:absolute;inset:-20%;animation:hueshift 16s ease-in-out infinite alternate">
         <div style="position:absolute;inset:0;background:radial-gradient(60% 55% at 25% 30%,#f4c9d6 0%,rgba(244,201,214,0) 60%);animation:meshmove 22s ease-in-out infinite"></div>
@@ -121,9 +126,11 @@
         <div style="position:absolute;inset:0;background:radial-gradient(70% 60% at 65% 80%,#c9a6dd 0%,rgba(201,166,221,0) 62%);animation:meshmove 30s ease-in-out infinite reverse"></div>
         <div style="position:absolute;inset:0;background:radial-gradient(60% 55% at 15% 85%,#f1d9b8 0%,rgba(241,217,184,0) 60%);animation:meshmove2 24s ease-in-out infinite reverse"></div>
       </div>
-      <div style="position:absolute;inset:-20%;background:conic-gradient(from 200deg at 60% 40%,rgba(255,255,255,.0),rgba(255,246,238,.35),rgba(255,255,255,0) 40%);mix-blend-mode:soft-light;animation:meshmove 28s ease-in-out infinite"></div>
-      <div style="position:absolute;top:-10%;right:-5%;width:55%;height:70%;background:radial-gradient(circle,rgba(255,244,230,.7) 0%,rgba(255,244,230,0) 70%);animation:shimmer 7s ease-in-out infinite"></div>
+      <!-- Soft drifting highlight bloom instead of conic gradient to avoid divide lines -->
+      <div style="position:absolute;top:-10%;right:-5%;width:60%;height:70%;background:radial-gradient(circle,rgba(255,244,230,.5) 0%,rgba(255,244,230,0) 70%);animation:shimmer 7s ease-in-out infinite"></div>
+      <!-- Film grain -->
       <div style="position:absolute;inset:-30%;opacity:.07;mix-blend-mode:overlay;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);animation:grain .5s steps(2) infinite"></div>
+      <!-- Overlay gradient to ensure readability -->
       <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(60,40,50,.35) 0%,rgba(90,61,74,.15) 38%,rgba(36,26,32,.7) 100%)"></div>
 
       <div class="hero-grid">
@@ -136,7 +143,7 @@
           <p style="font-size:clamp(15px,2vw,17px);font-weight:300;color:#f6eef0;line-height:1.7;margin-bottom:32px;opacity:.95">
             Un rincón creado para conectar con vos misma a través del movimiento, la respiración y el bienestar diario. Te acompañamos en cada etapa con carteras de cuero exclusivas, herramientas de organización y una hermosa comunidad.
           </p>
-          <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <div class="hero-btn-container">
             <a href="#opciones" style="padding:15px 32px;background:#5a3d4a;color:#f6eef0;border-radius:40px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;box-shadow:0 10px 25px -10px rgba(90,61,74,.5)">Ver opciones</a>
             <a href="#productos/cuero" style="padding:15px 32px;background:rgba(255,255,255,.9);color:#5a3d4a;border-radius:40px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500">Ver Catálogo</a>
           </div>

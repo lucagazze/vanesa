@@ -205,6 +205,72 @@
       </div>
     </section>
 
+    <!-- PRODUCT CATALOG IN HOME (CÁPSULAS - MAX 6) -->
+    <section style="padding:clamp(60px,9vw,110px) clamp(20px,5vw,64px);background:#f6eef0;border-top:1px solid rgba(120,80,95,.08)">
+      <div style="text-align:center;max-width:600px;margin:0 auto 48px">
+        <p style="font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#b07d8e;margin-bottom:14px">Nuestra Colección</p>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(34px,5vw,52px);color:#5a3d4a;line-height:1.02;text-transform:uppercase;letter-spacing:2px">Cápsulas</h2>
+        <p style="margin-top:16px;font-weight:300;color:#8a7178;line-height:1.6">Seleccioná una cápsula para explorar los productos destacados.</p>
+      </div>
+
+      <!-- Category filter buttons -->
+      <div style="max-width:900px;margin:0 auto 48px;display:flex;justify-content:center;gap:12px 16px;flex-wrap:wrap;width:100%">
+        <button onclick="{{ setIndumentaria }}" style="{{ styleIndumentaria }}">Cuero</button>
+        <button onclick="{{ setUna }}" style="{{ styleUna }}">UNA</button>
+        <button onclick="{{ setSkinCare }}" style="{{ styleSkinCare }}">Skin Care</button>
+        <button onclick="{{ setSuplementos }}" style="{{ styleSuplementos }}">Suplementos</button>
+      </div>
+
+      <div style="max-width:1180px;margin:0 auto">
+        <!-- Render grid of products (Home sliced max 6) -->
+        <sc-if value="{{ hasProducts }}">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:clamp(18px,2.5vw,32px)">
+            <sc-for list="{{ productsHome }}" as="p" hint-placeholder-count="3">
+              <article style="background:#fff;border-radius:12px;overflow:hidden;border:1px solid rgba(120,80,95,.08);box-shadow:0 10px 40px -28px rgba(90,61,74,.5);display:flex;flex-direction:column">
+                <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:{{ p.bg }};display:flex;align-items:center;justify-content:center;padding:12px">
+                  <img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:contain;object-position:{{ p.pos }}">
+                  <span style="position:absolute;top:12px;left:12px;background:rgba(246,238,240,.92);color:#5a3d4a;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:30px">{{ p.tag }}</span>
+                </div>
+                <div style="padding:22px 20px 24px;display:flex;flex-direction:column;flex:1">
+                  <h3 style="font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;color:#3d2c33;line-height:1.1">{{ p.name }}</h3>
+                  <p style="font-size:13.5px;font-weight:300;color:#8a7178;margin-top:6px;line-height:1.5;flex:1">{{ p.desc }}</p>
+                  <div style="display:flex;align-items:baseline;gap:10px;margin-top:16px">
+                    <span style="font-size:21px;font-weight:500;color:#5a3d4a">{{ p.price }}</span>
+                    <span style="font-size:13px;font-weight:300;color:#b8a3aa">{{ p.note }}</span>
+                  </div>
+                  <a href="{{ p.wa }}" target="_blank" style="margin-top:18px;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px;background:#25804f;color:#fff;border-radius:40px;font-size:13px;letter-spacing:1px;text-transform:uppercase;transition:transform .2s" style-hover="transform:translateY(-2px)">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.043zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                    Pedir por WhatsApp
+                  </a>
+                </div>
+              </article>
+            </sc-for>
+          </div>
+          <!-- Ver más button -->
+          <div style="text-align:center;margin-top:40px">
+            <a href="#productos/{{ activeCat }}" style="display:inline-flex;align-items:center;gap:10px;padding:15px 38px;border:2px solid #5a3d4a;color:#5a3d4a;border-radius:40px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;transition:all 0.2s" style-hover="background:#5a3d4a;color:#fff">
+              Ver Colección Completa
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </sc-if>
+
+        <!-- Render placeholder if active capsule is empty -->
+        <sc-if value="{{ noProducts }}">
+          <div style="background:#fff;border-radius:16px;border:1px solid rgba(120,80,95,.08);box-shadow:0 20px 50px -25px rgba(90,61,74,.25);padding:60px 40px;text-align:center;max-width:700px;margin:0 auto">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:#5a3d4a;margin-bottom:18px">{{ emptyTitle }}</h3>
+            <p style="font-size:16px;font-weight:300;color:#7a5c66;line-height:1.7;margin-bottom:32px;max-width:540px;margin-left:auto;margin-right:auto">
+              {{ emptyMessage }}
+            </p>
+            <a href="{{ waEmptyLink }}" target="_blank" style="display:inline-flex;align-items:center;gap:10px;padding:15px 36px;background:#25804f;color:#fff;border-radius:40px;font-size:13.5px;letter-spacing:1px;text-transform:uppercase;font-weight:500">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.043zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+              Consultar por WhatsApp
+            </a>
+          </div>
+        </sc-if>
+      </div>
+    </section>
+
     <!-- VIDEO INSTITUCIONAL -->
     <section id="video" style="padding:clamp(60px,8vw,100px) clamp(20px,5vw,64px);background:linear-gradient(180deg,#fff 0%,#f6eef0 100%)">
       <div style="max-width:960px;margin:0 auto;text-align:center">
@@ -550,6 +616,9 @@ class Component extends DCLogic {
     const hasProducts = products.length > 0;
     const noProducts = products.length === 0;
 
+    // Slice to maximum 6 for Home page
+    const productsHome = products.slice(0, 6);
+
     let emptyTitle = "";
     let emptyMessage = "";
     if (activeCat === 'skincare') {
@@ -583,12 +652,14 @@ class Component extends DCLogic {
       faq3Icon,
       faq4Icon,
       products,
+      productsHome,
       hasProducts,
       noProducts,
       emptyTitle,
       emptyMessage,
       waEmptyLink,
       ytLink: yt,
+      activeCat,
       waNav: wa("¡Hola Vane! 💕 Quiero hacer un pedido."),
       waYoga: wa("¡Hola Vane! Me interesan las clases de yoga 🧘‍♀️"),
       waPlanner: wa("¡Hola Vane! Me gustaría descargar el planner gratuito 📅"),

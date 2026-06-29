@@ -30,11 +30,31 @@
   
   /* Dropdown styling */
   .nav-item{position:relative;display:inline-block}
-  .dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:rgba(246,238,240,0.96);backdrop-filter:blur(14px);border:1px solid rgba(120,80,95,0.15);border-radius:8px;min-width:160px;box-shadow:0 10px 30px -10px rgba(90,61,74,0.3);padding:10px 0;z-index:100}
+  .dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:rgba(246,238,240,0.96);backdrop-filter:blur(14px);border:1px solid rgba(120, 80, 95, 0.15);border-radius:8px;min-width:160px;box-shadow:0 10px 30px -10px rgba(90,61,74,0.3);padding:10px 0;z-index:100}
   .dropdown-menu a{display:block;padding:10px 20px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#7a5c66;transition:all 0.2s ease;border-bottom:none !important;font-weight:normal !important;padding-bottom:10px !important}
   .dropdown-menu a:hover{background:#5a3d4a;color:#f6eef0}
   .nav-item:hover .dropdown-menu{display:block;animation:dropdownFade 0.2s ease}
   @keyframes dropdownFade{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
+
+  /* Responsive Grids & Nav */
+  .desktop-nav{display:flex;gap:clamp(16px,3vw,40px);align-items:center}
+  .mobile-menu-btn{display:none;background:none;border:none;color:#5a3d4a;cursor:pointer;outline:none;padding:4px}
+  .mobile-nav{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(246,238,240,0.98);backdrop-filter:blur(14px);border-bottom:1px solid rgba(120,80,95,0.15);flex-direction:column;padding:24px;gap:18px;box-shadow:0 15px 30px -10px rgba(90,61,74,0.25);z-index:90}
+  .mobile-nav a{font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:#7a5c66;font-weight:500;padding:6px 0}
+  .mobile-nav-products-sub{display:flex;flex-direction:column;gap:10px;padding-left:16px;border-left:1px solid rgba(120,80,95,0.15);margin-top:4px}
+  
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:clamp(32px,6vw,72px);align-items:center;max-width:1180px;width:100%;position:relative;z-index:1}
+  .quienes-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:clamp(32px,5vw,64px);align-items:center;max-width:1080px;margin:0 auto;width:100%}
+
+  @media (max-width: 768px) {
+    .desktop-nav{display:none !important}
+    .mobile-menu-btn{display:block !important}
+    .mobile-nav.open{display:flex !important}
+    .hero-grid{grid-template-columns:1fr;text-align:center;gap:40px}
+    .hero-text-col{text-align:center !important;max-width:100% !important}
+    .hero-text-col div{justify-content:center !important}
+    .quienes-grid{grid-template-columns:1fr;gap:40px}
+  }
 </style>
 </helmet>
 
@@ -42,8 +62,10 @@
 
   <!-- NAV -->
   <header style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,64px);background:rgba(246,238,240,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(120,80,95,.1)">
-    <a href="#inicio" style="font-family:'Cormorant Garamond',serif;font-size:26px;letter-spacing:5px;font-weight:600;color:#5a3d4a">VANE - UNA</a>
-    <nav style="display:flex;gap:clamp(16px,3vw,40px);align-items:center;font-size:13px;letter-spacing:1.5px;text-transform:uppercase">
+    <a href="#inicio" style="font-family:'Cormorant Garamond',serif;font-size:26px;letter-spacing:5px;font-weight:600;color:#5a3d4a;white-space:nowrap">VANE - UNA</a>
+    
+    <!-- Desktop navigation -->
+    <nav class="desktop-nav">
       <a href="#inicio" style="{{ navInicio }}">Inicio</a>
       <a href="#quienes-somos" style="{{ navQuienes }}">Quiénes somos</a>
       <div class="nav-item">
@@ -61,11 +83,37 @@
       <a href="#contacto" style="{{ navContacto }}">Contacto</a>
       <a href="{{ waNav }}" target="_blank" style="display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:#5a3d4a;color:#f6eef0;border-radius:40px;font-size:12px">Pedir</a>
     </nav>
+
+    <!-- Mobile menu button -->
+    <button onclick="{{ toggleMobileMenu }}" class="mobile-menu-btn" aria-label="Menú">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Mobile navigation menu -->
+    <div class="{{ mobileMenuClass }}">
+      <a href="#inicio" onclick="{{ closeMobileMenu }}">Inicio</a>
+      <a href="#quienes-somos" onclick="{{ closeMobileMenu }}">Quiénes somos</a>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <span style="font-size:11px;letter-spacing:1px;color:#a98c95;text-transform:uppercase">Categorías de Productos:</span>
+        <div class="mobile-nav-products-sub">
+          <a href="#productos/cuero" onclick="{{ closeMobileMenu }}">Cuero</a>
+          <a href="#productos/una" onclick="{{ closeMobileMenu }}">UNA</a>
+          <a href="#productos/skincare" onclick="{{ closeMobileMenu }}">Skin Care</a>
+          <a href="#productos/suplementos" onclick="{{ closeMobileMenu }}">Suplementos</a>
+        </div>
+      </div>
+      <a href="#contacto" onclick="{{ closeMobileMenu }}">Contacto</a>
+      <a href="{{ waNav }}" target="_blank" style="margin-top:8px;padding:12px;background:#5a3d4a;color:#f6eef0;border-radius:40px;text-align:center;font-size:13px;letter-spacing:1px">Pedir por WhatsApp</a>
+    </div>
   </header>
 
   <!-- ==================== PAGE: INICIO ==================== -->
   <sc-if value="{{ showInicio }}">
-    <!-- HERO (Fondo animado, 2 columnas) -->
+    <!-- HERO -->
     <section id="top" style="position:relative;min-height:92vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#241a20;padding:clamp(60px,10vh,120px) clamp(20px,5vw,64px)">
       <div style="position:absolute;inset:-20%;animation:hueshift 16s ease-in-out infinite alternate">
         <div style="position:absolute;inset:0;background:radial-gradient(60% 55% at 25% 30%,#f4c9d6 0%,rgba(244,201,214,0) 60%);animation:meshmove 22s ease-in-out infinite"></div>
@@ -78,10 +126,9 @@
       <div style="position:absolute;inset:-30%;opacity:.07;mix-blend-mode:overlay;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);animation:grain .5s steps(2) infinite"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(60,40,50,.35) 0%,rgba(90,61,74,.15) 38%,rgba(36,26,32,.7) 100%)"></div>
 
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,350px),1fr));gap:clamp(32px,6vw,72px);align-items:center;max-width:1180px;width:100%;position:relative;z-index:1">
-        
+      <div class="hero-grid">
         <!-- Text Column -->
-        <div class="rev" style="max-width:580px;text-align:left">
+        <div class="hero-text-col rev" style="max-width:580px;text-align:left">
           <p style="font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#e8cdd8;margin-bottom:18px;opacity:.9">Tu espacio</p>
           <h1 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(38px,6vw,68px);line-height:1.06;color:#fff;text-shadow:0 2px 30px rgba(80,50,62,.3);margin-bottom:24px">
             AQUÍ te entendemos, <br><em style="font-style:italic">escuchamos y acompañamos</em>
@@ -175,7 +222,7 @@
   <!-- ==================== PAGE: QUIÉNES SOMOS ==================== -->
   <sc-if value="{{ showQuienesSomos }}">
     <section style="padding:clamp(60px,10vw,120px) clamp(20px,5vw,64px);background:#fff;min-height:75vh;display:flex;align-items:center">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(32px,5vw,64px);align-items:center;max-width:1080px;margin:0 auto;width:100%">
+      <div class="quienes-grid">
         <div class="rev" style="position:relative">
           <div style="position:absolute;inset:-12px;background:#e9d2dc;border-radius:12px;z-index:0"></div>
           <img src="img/hero5.jpeg" alt="Vane Yoga" style="position:relative;z-index:1;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:8px;box-shadow:0 15px 40px -15px rgba(90,61,74,.3)">
@@ -221,7 +268,7 @@
         
         <!-- Render grid of products -->
         <sc-if value="{{ hasProducts }}">
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:clamp(18px,2.5vw,32px)">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:clamp(18px,2.5vw,32px)">
             <sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
               <article style="background:#fff;border-radius:12px;overflow:hidden;border:1px solid rgba(120,80,95,.08);box-shadow:0 10px 40px -28px rgba(90,61,74,.5);display:flex;flex-direction:column">
                 <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:{{ p.bg }};display:flex;align-items:center;justify-content:center;padding:12px">
@@ -266,53 +313,87 @@
   <!-- ==================== PAGE: CONTACTO ==================== -->
   <sc-if value="{{ showContacto }}">
     <section style="padding:clamp(60px,10vw,120px) clamp(20px,5vw,64px);background:#f6eef0;min-height:75vh;display:flex;align-items:center">
-      <div style="max-width:960px;margin:0 auto;width:100%" class="rev">
-        <div style="text-align:center;margin-bottom:56px">
+      <div style="max-width:760px;margin:0 auto;width:100%" class="rev">
+        <div style="text-align:center;margin-bottom:48px">
           <p style="font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#b07d8e;margin-bottom:14px">Conectemos</p>
           <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(34px,5vw,50px);color:#5a3d4a;line-height:1.02">Contacto</h2>
-          <p style="margin-top:16px;font-weight:300;color:#8a7178;line-height:1.6">Escribinos para hacernos tu consulta o coordinar un pedido especial.</p>
+          <p style="margin-top:16px;font-weight:300;color:#8a7178;line-height:1.6">Ponete en contacto directo con nosotros a través de nuestros canales preferidos.</p>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:40px;align-items:start">
+        <div style="display:flex;flex-direction:column;gap:36px;align-items:stretch">
           
-          <!-- Contact Form -->
-          <div style="background:#fff;border-radius:16px;padding:36px 30px;box-shadow:0 15px 45px -25px rgba(90,61,74,.2);border:1px solid rgba(120,80,95,.08)">
-            <form onsubmit="event.preventDefault(); alert('¡Gracias por tu mensaje! Te responderemos muy pronto.');" style="display:flex;flex-direction:column;gap:18px">
-              <div>
-                <label style="display:block;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#7a5c66;margin-bottom:6px">Nombre completo</label>
-                <input type="text" required style="width:100%;padding:12px 16px;border-radius:8px;border:1px solid rgba(120,80,95,.2);outline:none;font-family:inherit;font-size:14px;color:#4a3f44;background:#fafafa">
-              </div>
-              <div>
-                <label style="display:block;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#7a5c66;margin-bottom:6px">Correo electrónico</label>
-                <input type="email" required style="width:100%;padding:12px 16px;border-radius:8px;border:1px solid rgba(120,80,95,.2);outline:none;font-family:inherit;font-size:14px;color:#4a3f44;background:#fafafa">
-              </div>
-              <div>
-                <label style="display:block;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#7a5c66;margin-bottom:6px">Mensaje</label>
-                <textarea required rows="4" style="width:100%;padding:12px 16px;border-radius:8px;border:1px solid rgba(120,80,95,.2);outline:none;font-family:inherit;font-size:14px;color:#4a3f44;background:#fafafa;resize:none"></textarea>
-              </div>
-              <button type="submit" style="margin-top:10px;padding:14px;background:#5a3d4a;color:#fff;border:none;border-radius:40px;text-transform:uppercase;letter-spacing:1.5px;font-size:12px;font-weight:500;cursor:pointer;transition:background .2s">Enviar Mensaje</button>
-            </form>
+          <!-- Direct WhatsApp Card -->
+          <div style="background:#fff;border-radius:16px;padding:48px 36px;text-align:center;box-shadow:0 15px 45px -25px rgba(90,61,74,.2);border:1px solid rgba(120,80,95,.08);display:flex;flex-direction:column;align-items:center;gap:20px">
+            <div style="width:72px;height:72px;border-radius:50%;background:#e6f4ea;display:flex;align-items:center;justify-content:center;color:#25804f">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.043zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            </div>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#5a3d4a;font-weight:600">Contactanos por WhatsApp</h3>
+            <p style="font-size:15px;font-weight:300;color:#7a5c66;line-height:1.7;max-width:520px;margin:0 auto">
+              Hacé clic en el botón a continuación para iniciar un chat directo con nosotros. Podés consultarnos sobre stock, detalles de talle, envíos a todo el país o coordinar retiros personalizados.
+            </p>
+            <a href="{{ waNav }}" target="_blank" style="display:inline-flex;align-items:center;gap:10px;padding:16px 40px;background:#25804f;color:#fff;border-radius:40px;font-size:14px;letter-spacing:1px;text-transform:uppercase;font-weight:600;box-shadow:0 10px 25px -5px rgba(37,128,79,.4);transition:transform .2s" style-hover="transform:scale(1.03)">
+              Escribir por WhatsApp
+            </a>
           </div>
 
-          <!-- Info Card -->
-          <div style="display:flex;flex-direction:column;gap:24px">
-            <div style="background:#fff;border-radius:16px;padding:30px;box-shadow:0 15px 45px -25px rgba(90,61,74,.2);border:1px solid rgba(120,80,95,.08)">
-              <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#5a3d4a;font-weight:600;margin-bottom:18px">Atención Directa</h3>
-              <p style="font-size:14px;font-weight:300;color:#7a5c66;line-height:1.6;margin-bottom:20px">
-                Respondemos tus dudas rápidamente por WhatsApp. Coordinamos entregas a todo el país.
-              </p>
-              <a href="{{ waNav }}" target="_blank" style="display:inline-flex;align-items:center;gap:8px;color:#25804f;font-weight:500;text-transform:uppercase;font-size:12px;letter-spacing:1px">
-                Escribir por WhatsApp
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 3h7v7h-2V6.41l-9 9-1.41-1.41 9-9H14V3z"/></svg>
-              </a>
-            </div>
+          <!-- FAQ Accordions -->
+          <div style="max-width:680px;margin:20px auto 0;width:100%">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#5a3d4a;font-weight:600;margin-bottom:20px;text-align:center">Preguntas Frecuentes</h3>
+            
+            <div style="display:flex;flex-direction:column;gap:12px">
+              
+              <!-- FAQ 1 -->
+              <div style="background:#fff;border-radius:10px;border:1px solid rgba(120,80,95,.1);overflow:hidden">
+                <button onclick="{{ toggleFaq1 }}" style="width:100%;padding:18px 20px;background:none;border:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer;outline:none;text-align:left;color:#5a3d4a;font-weight:500;font-size:14.5px">
+                  ¿Cómo realizo un pedido?
+                  <span style="font-size:18px;font-weight:600;color:#b07d8e">{{ faq1Icon }}</span>
+                </button>
+                <sc-if value="{{ faq1 }}">
+                  <div style="padding:0 20px 20px;font-size:14px;color:#7a5c66;line-height:1.6;border-top:1px solid rgba(120,80,95,.05);padding-top:12px">
+                    Hacé clic en el botón de WhatsApp o en cualquiera de nuestros productos para iniciar un chat. Coordinamos los detalles de talle, color y modelo directamente por ahí.
+                  </div>
+                </sc-if>
+              </div>
 
-            <div style="background:#fff;border-radius:16px;padding:30px;box-shadow:0 15px 45px -25px rgba(90,61,74,.2);border:1px solid rgba(120,80,95,.08)">
-              <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#5a3d4a;font-weight:600;margin-bottom:14px">Ubicación y Horarios</h3>
-              <p style="font-size:14px;font-weight:300;color:#7a5c66;line-height:1.6">
-                📍 Buenos Aires, Argentina (Envíos a todo el país)<br>
-                🕒 Horario de atención: Lunes a Viernes de 9 a 18 hs
-              </p>
+              <!-- FAQ 2 -->
+              <div style="background:#fff;border-radius:10px;border:1px solid rgba(120,80,95,.1);overflow:hidden">
+                <button onclick="{{ toggleFaq2 }}" style="width:100%;padding:18px 20px;background:none;border:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer;outline:none;text-align:left;color:#5a3d4a;font-weight:500;font-size:14.5px">
+                  ¿Qué medios de pago aceptan?
+                  <span style="font-size:18px;font-weight:600;color:#b07d8e">{{ faq2Icon }}</span>
+                </button>
+                <sc-if value="{{ faq2 }}">
+                  <div style="padding:0 20px 20px;font-size:14px;color:#7a5c66;line-height:1.6;border-top:1px solid rgba(120,80,95,.05);padding-top:12px">
+                    Aceptamos transferencias bancarias y efectivo al retirar en persona. Los datos de la cuenta se proveerán al confirmar tu pedido por WhatsApp.
+                  </div>
+                </sc-if>
+              </div>
+
+              <!-- FAQ 3 -->
+              <div style="background:#fff;border-radius:10px;border:1px solid rgba(120,80,95,.1);overflow:hidden">
+                <button onclick="{{ toggleFaq3 }}" style="width:100%;padding:18px 20px;background:none;border:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer;outline:none;text-align:left;color:#5a3d4a;font-weight:500;font-size:14.5px">
+                  ¿Hacen envíos a todo el país?
+                  <span style="font-size:18px;font-weight:600;color:#b07d8e">{{ faq3Icon }}</span>
+                </button>
+                <sc-if value="{{ faq3 }}">
+                  <div style="padding:0 20px 20px;font-size:14px;color:#7a5c66;line-height:1.6;border-top:1px solid rgba(120,80,95,.05);padding-top:12px">
+                    Sí, enviamos a cualquier punto de la Argentina. Los costos de envío se calculan en base a tu localidad y se coordinan en la misma charla de WhatsApp.
+                  </div>
+                </sc-if>
+              </div>
+
+              <!-- FAQ 4 -->
+              <div style="background:#fff;border-radius:10px;border:1px solid rgba(120,80,95,.1);overflow:hidden">
+                <button onclick="{{ toggleFaq4 }}" style="width:100%;padding:18px 20px;background:none;border:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer;outline:none;text-align:left;color:#5a3d4a;font-weight:500;font-size:14.5px">
+                  ¿Se pueden realizar cambios?
+                  <span style="font-size:18px;font-weight:600;color:#b07d8e">{{ faq4Icon }}</span>
+                </button>
+                <sc-if value="{{ faq4 }}">
+                  <div style="padding:0 20px 20px;font-size:14px;color:#7a5c66;line-height:1.6;border-top:1px solid rgba(120,80,95,.05);padding-top:12px">
+                    Sí. Las prendas y carteras tienen cambio dentro de los 15 días de recibida la compra, siempre y cuando se conserven sin uso y en perfectas condiciones.
+                  </div>
+                </sc-if>
+              </div>
+
             </div>
           </div>
 
@@ -362,7 +443,12 @@ class Component extends DCLogic {
     
     this.state = { 
       page: initialPage,
-      category: initialCategory 
+      category: initialCategory,
+      mobileMenuOpen: false,
+      faq1: false,
+      faq2: false,
+      faq3: false,
+      faq4: false
     };
   }
 
@@ -404,6 +490,22 @@ class Component extends DCLogic {
     const setUna = () => this.setState({ category: 'una' });
     const setSkinCare = () => this.setState({ category: 'skincare' });
     const setSuplementos = () => this.setState({ category: 'suplementos' });
+
+    // Mobile Menu Handlers
+    const toggleMobileMenu = () => this.setState({ mobileMenuOpen: !this.state.mobileMenuOpen });
+    const closeMobileMenu = () => this.setState({ mobileMenuOpen: false });
+    const mobileMenuClass = this.state.mobileMenuOpen ? "mobile-nav open" : "mobile-nav";
+
+    // FAQ Handlers
+    const toggleFaq1 = () => this.setState({ faq1: !this.state.faq1 });
+    const toggleFaq2 = () => this.setState({ faq2: !this.state.faq2 });
+    const toggleFaq3 = () => this.setState({ faq3: !this.state.faq3 });
+    const toggleFaq4 = () => this.setState({ faq4: !this.state.faq4 });
+
+    const faq1Icon = this.state.faq1 ? "−" : "+";
+    const faq2Icon = this.state.faq2 ? "−" : "+";
+    const faq3Icon = this.state.faq3 ? "−" : "+";
+    const faq4Icon = this.state.faq4 ? "−" : "+";
 
     // Header active style
     const activeNavStyle = "color:#5a3d4a;font-weight:600;border-bottom:2px solid #5a3d4a;padding-bottom:4px;";
@@ -469,6 +571,17 @@ class Component extends DCLogic {
       navQuienes,
       navProductos,
       navContacto,
+      toggleMobileMenu,
+      closeMobileMenu,
+      mobileMenuClass,
+      toggleFaq1,
+      toggleFaq2,
+      toggleFaq3,
+      toggleFaq4,
+      faq1Icon,
+      faq2Icon,
+      faq3Icon,
+      faq4Icon,
       products,
       hasProducts,
       noProducts,

@@ -84,7 +84,7 @@
           <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
         </a>
         <div class="dropdown-menu">
-          <a href="#productos/cuero">Cuero</a>
+          <a href="#productos/cuero">Bolsos</a>
           <a href="#productos/una">UNA</a>
           <a href="#productos/skincare">Skin Care</a>
           <a href="#productos/suplementos">Suplementos</a>
@@ -110,7 +110,7 @@
       <div style="display:flex;flex-direction:column;gap:6px">
         <span style="font-size:11px;letter-spacing:1px;color:#a98c95;text-transform:uppercase">Categorías de Productos:</span>
         <div class="mobile-nav-products-sub">
-          <a href="#productos/cuero" onclick="{{ closeMobileMenu }}">Cuero</a>
+          <a href="#productos/cuero" onclick="{{ closeMobileMenu }}">Bolsos</a>
           <a href="#productos/una" onclick="{{ closeMobileMenu }}">UNA</a>
           <a href="#productos/skincare" onclick="{{ closeMobileMenu }}">Skin Care</a>
           <a href="#productos/suplementos" onclick="{{ closeMobileMenu }}">Suplementos</a>
@@ -240,7 +240,7 @@
 
       <!-- Category filter buttons -->
       <div style="max-width:900px;margin:0 auto 48px;display:flex;justify-content:center;gap:12px 16px;flex-wrap:wrap;width:100%">
-        <button onclick="{{ setIndumentaria }}" style="{{ styleIndumentaria }}">Cuero</button>
+        <button onclick="{{ setIndumentaria }}" style="{{ styleIndumentaria }}">Bolsos</button>
         <button onclick="{{ setUna }}" style="{{ styleUna }}">UNA</button>
         <button onclick="{{ setSkinCare }}" style="{{ styleSkinCare }}">Skin Care</button>
         <button onclick="{{ setSuplementos }}" style="{{ styleSuplementos }}">Suplementos</button>
@@ -335,7 +335,7 @@
 
       <!-- Category filter buttons -->
       <div style="max-width:900px;margin:0 auto 48px;display:flex;justify-content:center;gap:12px 16px;flex-wrap:wrap;width:100%">
-        <button onclick="{{ setIndumentaria }}" style="{{ styleIndumentaria }}">Cuero</button>
+        <button onclick="{{ setIndumentaria }}" style="{{ styleIndumentaria }}">Bolsos</button>
         <button onclick="{{ setUna }}" style="{{ styleUna }}">UNA</button>
         <button onclick="{{ setSkinCare }}" style="{{ styleSkinCare }}">Skin Care</button>
         <button onclick="{{ setSuplementos }}" style="{{ styleSuplementos }}">Suplementos</button>
@@ -606,17 +606,90 @@ class Component extends DCLogic {
     const styleSuplementos = `background: ${activeCat === 'suplementos' ? activeColor : inactiveColor}; color: ${activeCat === 'suplementos' ? activeText : inactiveText}; border: 1px solid #5a3d4a; padding: 12px 28px; border-radius: 40px; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; outline: none;`;
 
     const raw = [
-      // 1st category: cuero (new leather bags)
+      // ============ CUERO ============
       { name: "Cartera Tote Marrón", tag: "100% Cuero", price: "$62.000", note: "cuero legítimo", desc: "Cartera tote de cuero vacuno color suela de primera calidad. Espaciosa, elegante y con finas terminaciones para acompañar tu día a día.", img: "img/cartera_marron.jpeg", bg: "#fdfbfa", pos: "center", category: "cuero" },
       { name: "Tote Cowhide B&W", tag: "Exclusivo", price: "$74.000", note: "vacuno con pelo", desc: "Cartera tote de cuero con pelo vacuno natural y estampa de vaca blanco y negro. Un accesorio de alta gama con personalidad única.", img: "img/cartera_vaca_negra.jpeg", bg: "#fbfbfb", pos: "center", category: "cuero" },
       { name: "Tote Cowhide Marrón", tag: "Exclusivo", price: "$74.000", note: "vacuno con pelo", desc: "Cartera de cuero vacuno con pelo en tonos marrón y blanco. Combina diseño orgánico, amplio espacio y costuras reforzadas.", img: "img/cartera_vaca_marron.jpeg", bg: "#fbf9f8", pos: "center", category: "cuero" },
-      // 2nd category: una (clothing)
-      { name: "Conjunto Alo Blanco", tag: "Más vendido", price: "$48.000", note: "top + calza", desc: "Set de top deportivo y calza tiro alto. Tela suave, segunda piel, ideal para yoga y día a día.", img: "img/conjunto.jpeg", bg: "#efe7e0", pos: "center 20%", category: "una" },
-      { name: "Gorra Alo Negra", tag: "Nuevo", price: "$22.000", note: "unisex", desc: "Gorra de algodón con bordado frontal. El detalle que completa cualquier look athleisure.", img: "img/gorra.jpeg", bg: "#e7e4e2", pos: "center", category: "una" },
-      { name: "Medias Alo (pack x2)", tag: "Pack", price: "$14.000", note: "talle único", desc: "Par de medias media caña de algodón con detalle de rayas. Suaves y con buena sujeción.", img: "img/medias.jpeg", bg: "#eceae8", pos: "center 30%", category: "una" },
-      { name: "Calza Tiro Alto", tag: "Esencial", price: "$32.000", note: "varios talles", desc: "Calza de compresión suave, tiro alto y cintura ancha que no se baja. Tu base para entrenar.", img: "img/conjunto.jpeg", bg: "#efe7e0", pos: "center 62%", category: "una" },
-      { name: "Top Deportivo", tag: "Esencial", price: "$24.000", note: "varios talles", desc: "Top con buena sujeción y espalda diseñada para moverte libre. Combinalo con tu calza favorita.", img: "img/conjunto.jpeg", bg: "#efe7e0", pos: "center 22%", category: "una" },
-      { name: "Look Completo", tag: "Combo", price: "$78.000", note: "conjunto + gorra + medias", desc: "Llevá todo junto y ahorrá: conjunto + gorra + pack de medias en un solo pedido.", img: "img/hero4.jpeg", bg: "#2a2326", pos: "center 30%", category: "una" },
+      { name: "Cartera Alas Negra", tag: "Nuevo", price: "$58.000", note: "cuero legítimo", desc: "Cartera de mano de cuero negro con detalle de alas en cristales. Compacta, versátil y con correa desmontable.", img: "img/productos/cuero_cartera_negra_alas.webp", bg: "#f5f5f5", pos: "center", category: "cuero" },
+      { name: "Clutch Zadig Wings", tag: "Exclusivo", price: "$68.000", note: "cuero + wallet", desc: "Clutch de cuero negro con alas bordadas y billetera interior desmontable. Elegante y práctica.", img: "img/productos/cuero_cartera_zadig_wallet.webp", bg: "#f5f5f5", pos: "center", category: "cuero" },
+
+      // ============ UNA (indumentaria) ============
+      { name: "Conjunto Alo Blanco", tag: "Más vendido", price: "$48.000", note: "top + calza", desc: "Set de top deportivo y calza tiro alto. Tela suave, segunda piel, ideal para yoga y día a día.", img: "img/productos/una_conjunto_blanco.webp", bg: "#efe7e0", pos: "center 25%", category: "una" },
+      { name: "Conjunto Gris Alo", tag: "Nuevo", price: "$52.000", note: "top + calza", desc: "Conjunto de bralette y legging tiro alto en tono taupe. Segunda piel con calce moldeador.", img: "img/productos/una_conjunto_gris.webp", bg: "#f0ecea", pos: "center 30%", category: "una" },
+      { name: "Conjunto Lila Alo", tag: "Nuevo", price: "$54.000", note: "top + calza", desc: "Set de top y calza tiro alto en lila con detalles en blanco. Estética elegante para yoga y pilates.", img: "img/productos/una_conjunto_lila.webp", bg: "#eee5ea", pos: "center 30%", category: "una" },
+      { name: "Conjunto Celeste Alo", tag: "Verano", price: "$46.000", note: "top + short", desc: "Set de bralette y short deportivo en celeste suave. Frescura y comodidad para el día a día.", img: "img/productos/una_conjunto_celeste.webp", bg: "#e6ecef", pos: "center 30%", category: "una" },
+      { name: "Conjunto Rosa Vino", tag: "Premium", price: "$56.000", note: "bralette + legging", desc: "Bralette y legging con costuras contrastantes en rosa vino. Diseño de alta gama.", img: "img/productos/una_conjunto_rosa_vino.webp", bg: "#e8dcdd", pos: "center 30%", category: "una" },
+      { name: "Conjunto Azul Shorts", tag: "Verano", price: "$48.000", note: "top + short", desc: "Set de top y short deportivo azul, ideal para entrenar en climas cálidos.", img: "img/productos/una_conjunto_azul_shorts.webp", bg: "#e2e5ea", pos: "center 30%", category: "una" },
+      { name: "Conjunto Azul Marino", tag: "Nuevo", price: "$50.000", note: "top + biker", desc: "Bralette y biker short azul marino. Sujeción firme y calce cómodo.", img: "img/productos/una_conjunto_azul_marino_shorts.webp", bg: "#e5e9ee", pos: "center 30%", category: "una" },
+      { name: "Conjunto Negro Alo", tag: "Esencial", price: "$52.000", note: "top + short", desc: "Set de top negro con detalle 'alo' y pollera-short deportiva. Elegancia atlética.", img: "img/productos/una_conjunto_negro_top_pollera.webp", bg: "#2b2b2b", pos: "center 30%", category: "una" },
+      { name: "Conjunto Blanco Alo Sport", tag: "Premium", price: "$54.000", note: "top + calza", desc: "Set de top y calza blancas con cintura elástica logo Alo. Look pulcro para estudios de yoga.", img: "img/productos/una_conjunto_top_pollera_blanca.webp", bg: "#e9e2d5", pos: "center 30%", category: "una" },
+      { name: "Conjunto Gris Chaqueta", tag: "Nuevo", price: "$62.000", note: "chaqueta + calza", desc: "Chaqueta cropped con cierre y calza a juego en gris claro rib. Sofisticado y cómodo.", img: "img/productos/una_conjunto_gris_chaqueta.webp", bg: "#eaeaea", pos: "center 30%", category: "una" },
+      { name: "Conjunto Gris Crop", tag: "Athleisure", price: "$50.000", note: "crop tee + calza", desc: "Crop tee y calza high waist en gris melange. Look día a día suave y cómodo.", img: "img/productos/una_conjunto_gris_crop_calza.webp", bg: "#e6e4e0", pos: "center 25%", category: "una" },
+      { name: "Conjunto Azul Crop", tag: "Athleisure", price: "$50.000", note: "crop tee + calza", desc: "Set de crop tee y legging azul suave. Estilo casual sport perfecto.", img: "img/productos/una_conjunto_azul_crop_calza.webp", bg: "#e0e6ea", pos: "center 25%", category: "una" },
+      { name: "Conjunto Negro Sport", tag: "Esencial", price: "$46.000", note: "top + short", desc: "Top de mangas cortas y short deportivo negro. Todoterreno de entrenamiento.", img: "img/productos/una_conjunto_negro_shorts.webp", bg: "#dedede", pos: "center 30%", category: "una" },
+
+      { name: "Calza Alo Negra", tag: "Best seller", price: "$38.000", note: "varios talles", desc: "Calza tiro alto negra clásica con logo alo. Compresión firme, largo capri.", img: "img/productos/una_calza_alo_negra.webp", bg: "#dcdcdc", pos: "center 30%", category: "una" },
+      { name: "Calza Alo Gris", tag: "Esencial", price: "$36.000", note: "varios talles", desc: "Calza tiro alto en gris pardo. Costuras seamless para máxima comodidad.", img: "img/productos/una_calza_alo_gris.webp", bg: "#e8e5e2", pos: "center 30%", category: "una" },
+      { name: "Calza Verde Menta", tag: "Nuevo", price: "$36.000", note: "con bolsillo", desc: "Legging capri verde menta con bolsillo lateral. Frescura primaveral.", img: "img/productos/una_calza_verde_menta.webp", bg: "#e2ebe0", pos: "center 30%", category: "una" },
+
+      { name: "Top Alo Ribbed Negro", tag: "Esencial", price: "$24.000", note: "algodón rib", desc: "Top rib de algodón negro con logo alo. Silueta ajustada cropped.", img: "img/productos/una_top_alo_negro.webp", bg: "#dedede", pos: "center 30%", category: "una" },
+      { name: "Top Alo Ribbed Blanco", tag: "Esencial", price: "$24.000", note: "algodón rib", desc: "Top rib blanco con logo alo. Versátil y elegante.", img: "img/productos/una_top_ribbed_blanco.webp", bg: "#efefef", pos: "center 30%", category: "una" },
+      { name: "Top Sujeción Alo", tag: "Alta sujeción", price: "$28.000", note: "para entrenar", desc: "Top con copa moldeada y sujeción media-alta. Ideal para yoga y pilates.", img: "img/productos/una_top_blanco_sujecion.webp", bg: "#e6e6de", pos: "center 25%", category: "una" },
+      { name: "Top Alo Blanco Fit", tag: "Nuevo", price: "$26.000", note: "corte femenino", desc: "Top rib blanco con corte bajo el busto. Estilo lencero premium.", img: "img/productos/una_top_alo_blanco_ribbed_v2.webp", bg: "#eee7e5", pos: "center 30%", category: "una" },
+
+      { name: "Remera Alo Azul", tag: "Casual", price: "$26.000", note: "manga corta", desc: "Remera azul marino de tela suave con logo alo. Calce femenino.", img: "img/productos/una_remera_azul_manga_corta.webp", bg: "#e8ecef", pos: "center 25%", category: "una" },
+      { name: "Remera Alo Blanca", tag: "Esencial", price: "$24.000", note: "manga corta", desc: "Remera blanca básica con logo alo. La base de tu placard athleisure.", img: "img/productos/una_remera_blanca_alo.webp", bg: "#efefef", pos: "center 25%", category: "una" },
+
+      { name: "Buzo Alo Azul Mujer", tag: "Abrigo", price: "$62.000", note: "oversize", desc: "Buzo oversize azul marino con felpa interior. Perfecto para el frío.", img: "img/productos/una_buzo_alo_azul_mujer.webp", bg: "#e6e8ea", pos: "center 20%", category: "una" },
+      { name: "Buzo Alo Marrón", tag: "Nuevo", price: "$64.000", note: "oversize", desc: "Buzo oversize marrón chocolate con logo bordado. Suavidad y calidez.", img: "img/productos/una_buzo_marron_oversize.webp", bg: "#e8e2dd", pos: "center 20%", category: "una" },
+      { name: "Buzo Alo Crema Cuello", tag: "Premium", price: "$66.000", note: "cuello alto", desc: "Buzo crema con cuello alto y felpa suave. Sofisticación invernal.", img: "img/productos/una_buzo_crema_turtleneck.webp", bg: "#ede9e0", pos: "center 20%", category: "una" },
+      { name: "Buzo Violeta Turtleneck", tag: "Nuevo", price: "$66.000", note: "cuello alto", desc: "Buzo cropped violeta con cuello alto. Look elegante y abrigado.", img: "img/productos/una_buzo_violeta_turtleneck.webp", bg: "#e3d9e0", pos: "center 20%", category: "una" },
+      { name: "Buzo Gris Turtleneck", tag: "Esencial", price: "$64.000", note: "cuello alto", desc: "Buzo cropped gris jaspeado con cuello alto suave. Un básico premium.", img: "img/productos/una_buzo_gris_turtleneck.webp", bg: "#e5e5e5", pos: "center 20%", category: "una" },
+      { name: "Buzo Medio Zip Azul", tag: "Nuevo", price: "$68.000", note: "medio cierre", desc: "Buzo cropped azul marino con medio cierre. Versátil y actual.", img: "img/productos/una_buzo_azul_medio_zip.webp", bg: "#e3e5e8", pos: "center 20%", category: "una" },
+      { name: "Buzo Alo Hombre Navy", tag: "Unisex", price: "$62.000", note: "hombre", desc: "Buzo azul marino corte hombre con logo bordado. Comodidad diaria.", img: "img/productos/una_buzo_alo_azul_hombre.webp", bg: "#e0e3e6", pos: "center 20%", category: "una" },
+
+      { name: "Vestido Negro Deportivo", tag: "Verano", price: "$46.000", note: "con calza interior", desc: "Vestido deportivo negro con espalda cruzada y calza interior. Ideal para tenis o entrenar.", img: "img/productos/una_vestido_negro_deportivo.webp", bg: "#dedede", pos: "center 25%", category: "una" },
+      { name: "Vestido Blanco Alo", tag: "Verano", price: "$44.000", note: "corte lencero", desc: "Vestido blanco de corte lencero con breteles finos. Fresco y minimalista.", img: "img/productos/una_vestido_blanco.webp", bg: "#efefef", pos: "center 25%", category: "una" },
+
+      { name: "Short Alo Negro", tag: "Verano", price: "$28.000", note: "cintura elástica", desc: "Short deportivo negro con cintura elástica alta. Movilidad total.", img: "img/productos/una_shorts_negros.webp", bg: "#dcdcdc", pos: "center 30%", category: "una" },
+
+      { name: "Bikini Negra + Gorra", tag: "Playa", price: "$42.000", note: "conjunto verano", desc: "Bikini top negro y pareo con gorra rosa suave. Combo para escapadas de playa.", img: "img/productos/una_bikini_negra_gorra_rosa.webp", bg: "#e6d4dc", pos: "center 25%", category: "una" },
+      { name: "Gorra Alo Blanca", tag: "Accesorio", price: "$22.000", note: "unisex", desc: "Gorra de algodón blanca con logo alo bordado. El toque final athleisure.", img: "img/productos/una_gorra_blanca_top_lila.webp", bg: "#dfe4e2", pos: "center 25%", category: "una" },
+
+      { name: "Bolso Duffle Negro", tag: "Gym bag", price: "$68.000", note: "grande", desc: "Bolso duffle negro con logo alo y correa desmontable. Perfecto para el gym.", img: "img/productos/una_bolso_duffle_negro.webp", bg: "#e2e2e2", pos: "center 45%", category: "una" },
+      { name: "Bolso Duffle Rosa", tag: "Gym bag", price: "$68.000", note: "grande", desc: "Bolso duffle nude/rosa con correa cruzada. Suavidad y funcionalidad.", img: "img/productos/una_bolso_duffle_rosa.webp", bg: "#efe0dc", pos: "center 45%", category: "una" },
+      { name: "Bolso Duffle Rosa Palo", tag: "Gym bag", price: "$66.000", note: "mediano", desc: "Duffle rosa palo con doble manija y bandolera. Práctico y elegante.", img: "img/productos/una_bolso_duffle_rosa_palo.webp", bg: "#efe0dc", pos: "center 55%", category: "una" },
+
+      { name: "Campera Puffer Blanca", tag: "Invierno", price: "$120.000", note: "con capucha", desc: "Campera puffer blanca cropped con capucha desmontable. Máximo abrigo estético.", img: "img/productos/una_campera_puffer_blanca.webp", bg: "#efefef", pos: "center 20%", category: "una" },
+      { name: "Puffer Blanca Alo", tag: "Invierno", price: "$135.000", note: "premium", desc: "Puffer blanca con capucha voluminosa. Con etiqueta alo original.", img: "img/productos/una_campera_puffer_blanca_2.webp", bg: "#eeeeee", pos: "center 25%", category: "una" },
+      { name: "Puffer Negra Corta", tag: "Invierno", price: "$125.000", note: "corte cropped", desc: "Puffer negra cropped con capucha desmontable. Elegancia urbana.", img: "img/productos/una_campera_puffer_negra.webp", bg: "#dedede", pos: "center 25%", category: "una" },
+      { name: "Puffer Negra París", tag: "Premium", price: "$135.000", note: "con capucha", desc: "Puffer negra estilo europeo con cintura ajustada y capucha. Look impecable.", img: "img/productos/una_campera_puffer_negra_paris.webp", bg: "#dedede", pos: "center 25%", category: "una" },
+      { name: "Puffer Negra Bomber", tag: "Invierno", price: "$130.000", note: "corte bomber", desc: "Puffer negra corte bomber cropped con capucha voluminosa. Warmth premium.", img: "img/productos/una_campera_puffer_negra_2.webp", bg: "#25302b", pos: "center 25%", category: "una" },
+
+      // ============ SKIN CARE (Medicube) ============
+      { name: "Triple Collagen Cream", tag: "Medicube", price: "$38.000", note: "50 ml", desc: "Crema con colágeno triple, niacinamida y elastina hidrolizada. Firmeza y elasticidad.", img: "img/productos/skincare_triple_collagen_cream.webp", bg: "#fbe9ec", pos: "center", category: "skincare" },
+      { name: "Deep Vita C Cream", tag: "Medicube", price: "$42.000", note: "55 g", desc: "Crema cápsula con 50% agua de vitamina + derivados de vit C y niacinamida 5%. Luminosidad.", img: "img/productos/skincare_deep_vita_c_cream.webp", bg: "#f2e6d5", pos: "center", category: "skincare" },
+      { name: "Deep Vita C Cream (box)", tag: "Medicube", price: "$42.000", note: "55 g", desc: "Deep Vita C Capsule Cream con caja original. Antioxidante potente para el día.", img: "img/productos/skincare_deep_vita_c_cream_box.webp", bg: "#f2e6d5", pos: "center", category: "skincare" },
+      { name: "AGE-R Vita C Ampoule", tag: "Serum premium", price: "$48.000", note: "20 ml", desc: "Ampolla con Vitamina C 21%, B5 2% y derivados. Manchas, pecas y opacidad.", img: "img/productos/skincare_age_r_vita_c_ampoule.webp", bg: "#e6d9c0", pos: "center", category: "skincare" },
+      { name: "AGE-R Vita C Bottle", tag: "Serum premium", price: "$48.000", note: "20 ml", desc: "Vita C Pro Ampoule para tratamiento intensivo de melanina. Alta pureza premium.", img: "img/productos/skincare_age_r_vita_c_bottle.webp", bg: "#efe4d0", pos: "center", category: "skincare" },
+      { name: "Deep Vita C Pad", tag: "Toner pad", price: "$34.000", note: "70 pads", desc: "70 pads exfoliantes con vitamina C y niacinamida 2%. Textura suave y luminosa.", img: "img/productos/skincare_deep_vita_c_pad.webp", bg: "#f4ecd2", pos: "center", category: "skincare" },
+      { name: "AGE-R Glutathione Cream", tag: "Anti-edad", price: "$54.000", note: "50 ml", desc: "Crema con glutatión, colágeno y péptidos. Efecto glow y firmeza.", img: "img/productos/skincare_age_r_glutathione_cream.webp", bg: "#e8dfd0", pos: "center", category: "skincare" },
+      { name: "Glutathione Cream Jar", tag: "Anti-edad", price: "$54.000", note: "50 ml", desc: "AGE-R Glutathione Glow Capsule Cream. Textura ligera con micro cápsulas activas.", img: "img/productos/skincare_age_r_glutathione_jar.webp", bg: "#e8dfd0", pos: "center", category: "skincare" },
+      { name: "Kojic Turmeric Mask", tag: "Máscara", price: "$18.000", note: "1 hoja", desc: "Máscara nocturna kojic acid + cúrcuma. Piel de porcelana en 3-4 hs.", img: "img/productos/skincare_kojic_turmeric_mask_pkg.webp", bg: "#f5ecc9", pos: "center", category: "skincare" },
+      { name: "Deep Vita A Retinol", tag: "Serum", price: "$46.000", note: "30 ml", desc: "Serum con retinol HPR 1% y complejo colágeno 3%. Renovación intensiva.", img: "img/productos/skincare_deep_vita_a_retinol.webp", bg: "#e6d8c4", pos: "center", category: "skincare" },
+      { name: "Vita A Retinol Trio", tag: "Combo", price: "$120.000", note: "3 unidades", desc: "Trío de Deep Vita A Retinol Serum. Ideal para tratamiento continuo.", img: "img/productos/skincare_deep_vita_a_retinol_trio.webp", bg: "#e5d5be", pos: "center", category: "skincare" },
+      { name: "PDRN Pink Exosome Shot", tag: "Regenerador", price: "$56.000", note: "30 ml", desc: "PDRN + colágeno + exosomas. Regeneración celular y firmeza rosa.", img: "img/productos/skincare_pdrn_exosome_bottle.webp", bg: "#f4e2e6", pos: "center", category: "skincare" },
+      { name: "PDRN Exosome (box)", tag: "Regenerador", price: "$56.000", note: "30 ml", desc: "Exosome Shot 7500 con caja. Regeneración profunda y sostenida.", img: "img/productos/skincare_pdrn_exosome_box.webp", bg: "#f6e5e9", pos: "center", category: "skincare" },
+      { name: "PDRN Pink Gel Mask", tag: "Máscara", price: "$18.000", note: "1 hoja", desc: "Máscara gel PDRN con sodium DNA, niacinamida y colágeno hidrolizado.", img: "img/productos/skincare_pdrn_pink_gel_mask.webp", bg: "#f6e5e9", pos: "center", category: "skincare" },
+      { name: "Triple Deep Erasing Cream", tag: "Anti-manchas", price: "$44.000", note: "todo tipo de piel", desc: "Crema para atenuar manchas y textura irregular. Fórmula intensiva Medicube.", img: "img/productos/skincare_triple_deep_erasing.webp", bg: "#f2d9c9", pos: "center", category: "skincare" },
+      { name: "Red Body Peeling", tag: "Cuerpo", price: "$38.000", note: "110 g", desc: "Peeling corporal con AHA+BHA+PHA+LHA + niacinamida 2%. Textura suave y renovada.", img: "img/productos/skincare_red_body_peeling.webp", bg: "#f3d9d9", pos: "center", category: "skincare" },
+
+      // ============ SUPLEMENTOS ============
+      { name: "Vitamina K2 + D3", tag: "Huesos", price: "$18.000", note: "30 cápsulas", desc: "K2 100 mcg + D3 4000 UI. Menaquinona-7 para huesos y absorción de calcio. Sin gluten.", img: "img/productos/supl_vitamina_k2_d3.webp", bg: "#ecefe2", pos: "center", category: "suplementos" },
+      { name: "Whey Protein Ultra Tech", tag: "Proteína", price: "$32.000", note: "1 kg vainilla", desc: "Whey protein isolate + concentrate, fórmula desarrollada en USA. 25g proteína por porción.", img: "img/productos/supl_whey_protein_ultratech.webp", bg: "#f4e2e2", pos: "center", category: "suplementos" },
+      { name: "Turmeric Ginger Complex", tag: "Antiinflamatorio", price: "$22.000", note: "3000 mg", desc: "Cúrcuma + jengibre estandarizado 3000 mg por porción. Sin gluten, herbal tradicional.", img: "img/productos/supl_turmeric_ginger.webp", bg: "#e7ede0", pos: "center", category: "suplementos" },
+      { name: "CoQ10 Ubiquinona", tag: "Energía", price: "$20.000", note: "300 mg · 30 cáps", desc: "Coenzima Q10 + Vitamina C. Energía celular y salud cardiovascular. Sin gluten.", img: "img/productos/supl_coq10_ubiquinona.webp", bg: "#f4e2e2", pos: "center", category: "suplementos" },
+      { name: "Omega-3 Kids DHA", tag: "Niños", price: "$28.000", note: "30 gummies", desc: "DHA 600 mg gummies zero sugar. Nordic Naturals #1 en USA. Tropical punch.", img: "img/productos/supl_omega3_children_dha.webp", bg: "#dee9ee", pos: "center", category: "suplementos" },
     ];
 
     const allProducts = raw.map(p => ({

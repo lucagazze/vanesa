@@ -14,7 +14,8 @@
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   @media (min-width: 769px){ html{ zoom: 1.25 } }
-  body{font-family:'Jost',sans-serif;color:#4a3f44;background:#f6eef0;scroll-behavior:smooth}
+  body{font-family:'Jost',sans-serif;color:#4a3f44;background:#f6eef0;scroll-behavior:smooth;padding-top:74px}
+  @media (max-width: 768px){ body{ padding-top:66px } }
   ::selection{background:#d9b8c4;color:#2e2428}
   @keyframes floatup{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
   @keyframes hueshift{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(18deg)}}
@@ -42,6 +43,45 @@
   .car-dots span.active{background:#5a3d4a;width:16px;border-radius:8px}
   article:has(.carousel[data-imgs="1"]) .car-arrow,
   article:has(.carousel[data-imgs="1"]) .car-dots{display:none !important}
+
+  /* Cart */
+  .cart-btn{position:relative;background:transparent;border:none;color:#5a3d4a;cursor:pointer;padding:6px;display:inline-flex;align-items:center;justify-content:center;outline:none}
+  .cart-btn svg{width:22px;height:22px}
+  .cart-badge{position:absolute;top:-2px;right:-4px;background:#cc2b3d;color:#fff;font-size:10px;font-weight:600;min-width:16px;height:16px;border-radius:8px;padding:0 5px;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+  .cart-overlay{position:fixed;inset:0;background:rgba(30,15,22,.45);backdrop-filter:blur(2px);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s ease}
+  .cart-overlay.open{opacity:1;pointer-events:auto}
+  .cart-drawer{position:fixed;top:0;right:0;height:100vh;width:420px;max-width:92vw;background:#fff;z-index:201;box-shadow:-10px 0 40px -10px rgba(0,0,0,.25);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+  .cart-drawer.open{transform:translateX(0)}
+  .cart-head{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;border-bottom:1px solid rgba(120,80,95,.12)}
+  .cart-head h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#5a3d4a}
+  .cart-close{background:transparent;border:none;font-size:24px;color:#7a5c66;cursor:pointer;padding:4px 8px;line-height:1;outline:none}
+  .cart-body{flex:1;overflow-y:auto;padding:8px 20px}
+  .cart-item{display:grid;grid-template-columns:70px 1fr auto;gap:14px;padding:14px 4px;border-bottom:1px solid rgba(120,80,95,.08);align-items:center}
+  .cart-item img{width:70px;height:88px;object-fit:cover;border-radius:8px;background:#f6eef0}
+  .cart-item-info h4{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:#3d2c33;line-height:1.2;margin-bottom:4px}
+  .cart-item-price{font-size:12.5px;color:#8a7178;margin-bottom:8px}
+  .cart-qty{display:inline-flex;align-items:center;gap:0;border:1px solid rgba(120,80,95,.2);border-radius:20px;overflow:hidden}
+  .cart-qty button{background:transparent;border:none;width:26px;height:26px;font-size:15px;color:#5a3d4a;cursor:pointer;line-height:1;outline:none}
+  .cart-qty button:hover{background:#f6eef0}
+  .cart-qty span{min-width:24px;text-align:center;font-size:13px;font-weight:500;color:#3d2c33}
+  .cart-remove{background:transparent;border:none;color:#b07d8e;cursor:pointer;font-size:18px;padding:6px;outline:none;align-self:start}
+  .cart-remove:hover{color:#cc2b3d}
+  .cart-empty{padding:40px 24px;text-align:center;color:#8a7178}
+  .cart-empty svg{width:56px;height:56px;color:#d9b8c4;margin:0 auto 14px;display:block}
+  .cart-foot{padding:18px 24px 24px;border-top:1px solid rgba(120,80,95,.12);background:#fdfbfc}
+  .cart-total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+  .cart-total-label{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#7a5c66}
+  .cart-total-val{font-family:'Cormorant Garamond',serif;font-size:26px;color:#5a3d4a;font-weight:600}
+  .cart-checkout{display:flex;align-items:center;justify-content:center;gap:10px;padding:15px;background:#25804f;color:#fff;border-radius:40px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;box-shadow:0 8px 20px -8px rgba(37,128,79,.5);transition:transform .2s;border:none;cursor:pointer;text-align:center;width:100%}
+  .cart-checkout:hover{transform:translateY(-2px)}
+  .cart-clear{margin-top:10px;background:transparent;border:none;color:#a98c95;font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;padding:8px;width:100%;text-align:center;outline:none}
+  .cart-clear:hover{color:#5a3d4a}
+  @keyframes toastPop{0%{opacity:0;transform:translate(-50%,-50%) scale(.85)}20%{opacity:1;transform:translate(-50%,-50%) scale(1.04)}35%{transform:translate(-50%,-50%) scale(1)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(.95)}}
+  .toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:300;background:rgba(61,44,51,.96);color:#fff;padding:20px 32px;border-radius:14px;font-size:15px;font-weight:500;letter-spacing:.3px;box-shadow:0 20px 60px -10px rgba(0,0,0,.45);animation:toastPop 2s ease forwards;max-width:82vw;text-align:center;display:flex;align-items:center;gap:12px;backdrop-filter:blur(6px)}
+  .toast svg{width:22px;height:22px;color:#8dd39b;flex-shrink:0}
+  .ver-coleccion-btn:hover{background:#5a3d4a !important;color:#fff !important}
+  .ver-coleccion-btn:hover svg{color:#fff}
+  @media (max-width: 768px){ .cart-drawer{width:100%} }
   .car-hint{display:none}
   @media (max-width: 768px){ .car-arrow{width:34px;height:34px;font-size:19px;opacity:.85} }
   
@@ -55,6 +95,7 @@
 
   /* Responsive Grids & Nav */
   .desktop-nav{display:flex;gap:clamp(16px,3vw,40px);align-items:center}
+  .mobile-cart-btn{display:none}
   .mobile-menu-btn{display:none;background:none;border:none;color:#5a3d4a;cursor:pointer;outline:none;padding:4px}
   .mobile-nav{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(246,238,240,0.98);backdrop-filter:blur(14px);border-bottom:1px solid rgba(120,80,95,0.15);flex-direction:column;padding:24px;gap:18px;box-shadow:0 15px 30px -10px rgba(90,61,74,0.25);z-index:90}
   .mobile-nav a{font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:#7a5c66;font-weight:500;padding:6px 0}
@@ -68,6 +109,7 @@
   @media (max-width: 768px) {
     .desktop-nav{display:none !important}
     .mobile-menu-btn{display:block !important}
+    .mobile-cart-btn{display:inline-flex !important}
     .mobile-nav.open{display:flex !important}
     .hero-grid{grid-template-columns:1fr;text-align:center;gap:40px}
     .hero-text-col{text-align:center !important;max-width:100% !important}
@@ -88,7 +130,7 @@
 <div style="overflow-x:hidden">
 
   <!-- NAV -->
-  <header style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,64px);background:rgba(246,238,240,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(120,80,95,.1)">
+  <header style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,64px);background:rgba(246,238,240,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(120,80,95,.1)">
     <a href="#inicio" style="font-family:'Cormorant Garamond',serif;font-size:26px;letter-spacing:5px;font-weight:600;color:#5a3d4a;white-space:nowrap">VANE - UNA</a>
     
     <!-- Desktop navigation -->
@@ -108,8 +150,17 @@
         </div>
       </div>
       <a href="#contacto" style="{{ navContacto }}">Contacto</a>
-      <a href="{{ waNav }}" target="_blank" style="display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:#5a3d4a;color:#f6eef0;border-radius:40px;font-size:12px">Pedir</a>
+      <button onclick="{{ openCart }}" class="cart-btn" aria-label="Ver carrito">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        <sc-if value="{{ showCartBadge }}"><span class="cart-badge">{{ cartCount }}</span></sc-if>
+      </button>
     </nav>
+
+    <!-- Cart button (mobile) -->
+    <button onclick="{{ openCart }}" class="cart-btn mobile-cart-btn" aria-label="Ver carrito" style="margin-left:auto;margin-right:8px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+      <sc-if value="{{ showCartBadge }}"><span class="cart-badge">{{ cartCount }}</span></sc-if>
+    </button>
 
     <!-- Mobile menu button -->
     <button onclick="{{ toggleMobileMenu }}" class="mobile-menu-btn" aria-label="Menú">
@@ -293,17 +344,22 @@
                     <span style="font-size:21px;font-weight:500;color:#5a3d4a">{{ p.price }}</span>
                     <span style="font-size:13px;font-weight:300;color:#b8a3aa">{{ p.note }}</span>
                   </div>
-                  <a href="{{ p.wa }}" target="_blank" style="margin-top:18px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 20px;background:#5a3d4a;color:#f6eef0;border-radius:40px;font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;transition:all .2s" style-hover="background:#422a35;transform:translateY(-2px)">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.043zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                    Pedir por WhatsApp
-                  </a>
+                  <div style="margin-top:18px;display:flex;gap:8px;align-items:stretch">
+                    <button type="button" onclick="{{ p.addToCart }}" style="flex:1;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 12px;background:#5a3d4a;color:#f6eef0;border:none;border-radius:40px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                      Al carrito
+                    </button>
+                    <a href="{{ p.wa }}" target="_blank" aria-label="Pedir por WhatsApp" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;background:#25804f;color:#fff;border-radius:50%;flex-shrink:0;transition:all .2s">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.043z"/></svg>
+                    </a>
+                  </div>
                 </div>
               </article>
             </sc-for>
           </div>
           <!-- Ver más button -->
           <div style="text-align:center;margin-top:40px">
-            <a href="#productos/{{ activeCat }}" style="display:inline-flex;align-items:center;gap:10px;padding:15px 38px;border:2px solid #5a3d4a;color:#5a3d4a;border-radius:40px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;transition:all 0.2s" style-hover="background:#5a3d4a;color:#fff">
+            <a href="#productos/{{ activeCat }}" class="ver-coleccion-btn" style="display:inline-flex;align-items:center;gap:10px;padding:15px 38px;border:2px solid #5a3d4a;color:#5a3d4a;border-radius:40px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;transition:all 0.2s">
               Ver Colección Completa
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
@@ -403,10 +459,15 @@
                     <span style="font-size:21px;font-weight:500;color:#5a3d4a">{{ p.price }}</span>
                     <span style="font-size:13px;font-weight:300;color:#b8a3aa">{{ p.note }}</span>
                   </div>
-                  <a href="{{ p.wa }}" target="_blank" style="margin-top:18px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 20px;background:#5a3d4a;color:#f6eef0;border-radius:40px;font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;transition:all .2s" style-hover="background:#422a35;transform:translateY(-2px)">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.043zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                    Pedir por WhatsApp
-                  </a>
+                  <div style="margin-top:18px;display:flex;gap:8px;align-items:stretch">
+                    <button type="button" onclick="{{ p.addToCart }}" style="flex:1;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 12px;background:#5a3d4a;color:#f6eef0;border:none;border-radius:40px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                      Al carrito
+                    </button>
+                    <a href="{{ p.wa }}" target="_blank" aria-label="Pedir por WhatsApp" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;background:#25804f;color:#fff;border-radius:50%;flex-shrink:0;transition:all .2s">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.043z"/></svg>
+                    </a>
+                  </div>
                 </div>
               </article>
             </sc-for>
@@ -521,6 +582,60 @@
         </div>
       </div>
     </section>
+  </sc-if>
+
+  <!-- CART DRAWER -->
+  <div class="{{ cartOverlayClass }}" onclick="{{ closeCart }}"></div>
+  <aside class="{{ cartClass }}" aria-label="Carrito">
+    <div class="cart-head">
+      <h3>Tu carrito <sc-if value="{{ showCartBadge }}"><span style="font-family:'Jost';font-size:14px;color:#a98c95;font-weight:400"> · {{ cartCount }}</span></sc-if></h3>
+      <button type="button" class="cart-close" onclick="{{ closeCart }}" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="cart-body">
+      <sc-if value="{{ cartEmpty }}">
+        <div class="cart-empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#5a3d4a;margin-bottom:6px">Tu carrito está vacío</p>
+          <p style="font-size:14px">Explorá las cápsulas y sumá lo que te guste.</p>
+        </div>
+      </sc-if>
+      <sc-for list="{{ cartItems }}" as="item">
+        <div class="cart-item">
+          <img src="{{ item.img }}" alt="{{ item.name }}">
+          <div class="cart-item-info">
+            <h4>{{ item.name }}</h4>
+            <div class="cart-item-price">{{ item.price }} · {{ item.subtotal }}</div>
+            <div class="cart-qty">
+              <button type="button" onclick="{{ item.dec }}" aria-label="Quitar uno">−</button>
+              <span>{{ item.qty }}</span>
+              <button type="button" onclick="{{ item.inc }}" aria-label="Sumar uno">+</button>
+            </div>
+          </div>
+          <button type="button" class="cart-remove" onclick="{{ item.remove }}" aria-label="Eliminar">✕</button>
+        </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ cartHasItems }}">
+      <div class="cart-foot">
+        <div class="cart-total">
+          <span class="cart-total-label">Total</span>
+          <span class="cart-total-val">{{ cartTotal }}</span>
+        </div>
+        <a href="{{ waCartLink }}" target="_blank" class="cart-checkout">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.043z"/></svg>
+          Enviar pedido por WhatsApp
+        </a>
+        <button type="button" class="cart-clear" onclick="{{ clearCart }}">Vaciar carrito</button>
+      </div>
+    </sc-if>
+  </aside>
+
+  <!-- TOAST -->
+  <sc-if value="{{ showToast }}">
+    <div class="toast">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+      <span>{{ toastMsg }}</span>
+    </div>
   </sc-if>
 
   <!-- FOOTER -->
@@ -648,15 +763,33 @@ class Component extends DCLogic {
       initialCategory = parts[1] || 'cuero';
     }
     
-    this.state = { 
+    let savedCart = [];
+    try {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        savedCart = JSON.parse(window.localStorage.getItem('vaneCart') || '[]');
+      }
+    } catch (_) {}
+
+    this.state = {
       page: initialPage,
       category: initialCategory,
       mobileMenuOpen: false,
+      cartOpen: false,
+      cart: Array.isArray(savedCart) ? savedCart : [],
+      toast: '',
       faq1: false,
       faq2: false,
       faq3: false,
       faq4: false
     };
+  }
+
+  _saveCart(cart) {
+    try {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        window.localStorage.setItem('vaneCart', JSON.stringify(cart));
+      }
+    } catch (_) {}
   }
 
   componentDidMount() {
@@ -816,6 +949,74 @@ class Component extends DCLogic {
       { name: "Omega-3 Kids DHA", tag: "Niños", price: "$28.000", note: "30 gummies", desc: "DHA 600 mg gummies zero sugar. Nordic Naturals #1 en USA. Tropical punch.", img: "img/productos/supl_omega3_children_dha.webp", bg: "#dee9ee", pos: "center", category: "suplementos" },
     ];
 
+    // ============ CARRITO ============
+    const cart = Array.isArray(this.state.cart) ? this.state.cart : [];
+    const parsePrice = s => Number(String(s).replace(/[^0-9]/g, "")) || 0;
+    const fmtPrice = n => "$" + n.toLocaleString("es-AR");
+    const cartCount = cart.reduce((s, i) => s + (i.qty || 0), 0);
+    const cartTotalNum = cart.reduce((s, i) => s + parsePrice(i.price) * (i.qty || 0), 0);
+    const cartTotal = fmtPrice(cartTotalNum);
+    const cartEmpty = cart.length === 0;
+    const hasCart = !cartEmpty;
+    const cartHasItems = !cartEmpty;
+    const showCartBadge = cartCount > 0;
+
+    const openCart = () => this.setState({ cartOpen: true });
+    const closeCart = () => this.setState({ cartOpen: false });
+    const toggleCart = () => this.setState({ cartOpen: !this.state.cartOpen });
+
+    const addItem = (product) => {
+      const c = (this.state.cart || []).map(x => ({ ...x }));
+      const found = c.find(i => i.name === product.name);
+      if (found) { found.qty = (found.qty || 0) + 1; }
+      else { c.push({ name: product.name, price: product.price, img: product.img, qty: 1 }); }
+      this._saveCart(c);
+      this.setState({ cart: c, cartOpen: true, toast: `${product.name} agregado ✓` });
+      setTimeout(() => { if (this.state.toast) this.setState({ toast: '' }); }, 2000);
+    };
+    const incItem = (name) => {
+      const c = (this.state.cart || []).map(x => ({ ...x }));
+      const f = c.find(i => i.name === name);
+      if (f) f.qty = (f.qty || 0) + 1;
+      this._saveCart(c); this.setState({ cart: c });
+    };
+    const decItem = (name) => {
+      let c = (this.state.cart || []).map(x => ({ ...x }));
+      const idx = c.findIndex(i => i.name === name);
+      if (idx < 0) return;
+      c[idx].qty = (c[idx].qty || 0) - 1;
+      if (c[idx].qty <= 0) c.splice(idx, 1);
+      this._saveCart(c); this.setState({ cart: c });
+    };
+    const removeItemFn = (name) => {
+      const c = (this.state.cart || []).filter(i => i.name !== name);
+      this._saveCart(c); this.setState({ cart: c });
+    };
+    const clearCart = () => {
+      this._saveCart([]); this.setState({ cart: [] });
+    };
+
+    const cartItems = cart.map(i => {
+      const sub = parsePrice(i.price) * (i.qty || 0);
+      return {
+        ...i,
+        subtotal: fmtPrice(sub),
+        inc: () => incItem(i.name),
+        dec: () => decItem(i.name),
+        remove: () => removeItemFn(i.name)
+      };
+    });
+
+    const cartLines = cart.map(i => `• ${i.qty}x ${i.name} — ${i.price} c/u`).join("\n");
+    const waCartLink = cartHasItems
+      ? wa(`¡Hola Vane! 💕 Quiero hacer este pedido:\n\n${cartLines}\n\nTotal: ${cartTotal}\n\n¿Coordinamos envío/retiro?`)
+      : wa("¡Hola Vane! 💕 Quiero hacer un pedido.");
+
+    const cartClass = this.state.cartOpen ? "cart-drawer open" : "cart-drawer";
+    const cartOverlayClass = this.state.cartOpen ? "cart-overlay open" : "cart-overlay";
+    const toastMsg = this.state.toast || '';
+    const showToast = !!toastMsg;
+
     const allProducts = raw.map(p => {
       const img2 = p.img2 || "";
       const img3 = p.img3 || "";
@@ -828,6 +1029,7 @@ class Component extends DCLogic {
         hasImg3: !!img3,
         hasImg4: !!img4,
         imgCount,
+        addToCart: () => addItem(p),
         wa: wa(`¡Hola Vane! 💕 Quiero pedir: ${p.name} (${p.price}). ¿Está disponible?`)
       };
     });
@@ -883,6 +1085,22 @@ class Component extends DCLogic {
       waNav: wa("¡Hola Vane! 💕 Quiero hacer un pedido."),
       waYoga: wa("¡Hola Vane! Me interesan las clases de yoga 🧘‍♀️"),
       waPlanner: wa("¡Hola Vane! Me gustaría descargar el planner gratuito 📅"),
+      openCart,
+      closeCart,
+      toggleCart,
+      clearCart,
+      cartItems,
+      cartCount,
+      cartTotal,
+      cartEmpty,
+      hasCart,
+      cartHasItems,
+      showCartBadge,
+      cartClass,
+      cartOverlayClass,
+      waCartLink,
+      toastMsg,
+      showToast,
       setIndumentaria,
       setUna,
       setSkinCare,

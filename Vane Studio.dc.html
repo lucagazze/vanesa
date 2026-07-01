@@ -581,54 +581,21 @@
         var wrap = c.parentElement;
         var dots = wrap.querySelector('.car-dots');
         if(!dots) return;
-        var w = c.clientWidth;
+        var w = c.clientWidth || c.offsetWidth;
+        if(!w) return;
         var idx = Math.round(c.scrollLeft / w);
         var spans = dots.querySelectorAll('span');
-        spans.forEach(function(s,i){ s.classList.toggle('active', i===idx); });
-      }
-
-      function initCar(c){
-        var wrap = c.parentElement;
-        var need = carCount(c);
-        var arrows = wrap.querySelectorAll('.car-arrow');
-        var existing = wrap.querySelector('.car-dots');
-
-        if(need < 2){
-          arrows.forEach(function(a){ a.style.display = 'none'; });
-          if(existing) existing.remove();
-          return;
-        }
-        arrows.forEach(function(a){ a.style.display = ''; });
-
-        var have = existing ? existing.children.length : 0;
-        if(have !== need){
-          if(existing) existing.remove();
-          var dots = document.createElement('div');
-          dots.className = 'car-dots';
-          for(var i=0;i<need;i++){
-            var s = document.createElement('span');
-            if(i===0) s.classList.add('active');
-            dots.appendChild(s);
-          }
-          wrap.appendChild(dots);
-        }
-        if(!c.__vaneScroll){
-          c.__vaneScroll = true;
-          c.addEventListener('scroll', function(){ updateDots(c); }, {passive:true});
+        for(var i=0; i<spans.length; i++){
+          if(i === idx) spans[i].classList.add('active');
+          else spans[i].classList.remove('active');
         }
       }
 
-      function initAll(){
-        document.querySelectorAll('.carousel').forEach(initCar);
-      }
-
-      // Init now, plus retries to catch late/async renders from the framework
-      initAll();
-      [100, 400, 1000, 2500].forEach(function(ms){ setTimeout(initAll, ms); });
-      window.addEventListener('load', initAll);
-      window.addEventListener('hashchange', function(){ setTimeout(initAll, 150); });
-      var mo = new MutationObserver(function(){ initAll(); });
-      mo.observe(document.body, {childList:true, subtree:true});
+      // Scroll listener via delegation using capture phase (scroll doesn't bubble)
+      document.addEventListener('scroll', function(e){
+        var t = e.target;
+        if(t && t.classList && t.classList.contains('carousel')) updateDots(t);
+      }, true);
 
       // Mouse drag on desktop
       document.addEventListener('mousedown', function(e){

@@ -28,6 +28,10 @@
   .card{background:linear-gradient(180deg,#fff 0%,#fdfbfc 100%);border-radius:16px;border:1.2px solid rgba(120,80,95,.18);box-shadow:0 12px 35px -18px rgba(90,61,74,.12);transition:all .4s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;overflow:hidden;position:relative}
   .card:hover{transform:translateY(-8px);box-shadow:0 25px 50px -20px rgba(90,61,74,.2);border-color:rgba(120,80,95,.32)}
   .marquee-track{display:inline-block;white-space:nowrap;animation:marquee 25s linear infinite}
+  .carousel{display:flex;width:100%;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+  .carousel::-webkit-scrollbar{display:none}
+  .carousel img{min-width:100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:start;flex-shrink:0}
+  .car-hint{position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,.55);color:#fff;padding:4px 10px;border-radius:20px;font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;z-index:2;pointer-events:none;display:flex;align-items:center;gap:6px}
   
   /* Dropdown styling */
   .nav-item{position:relative;display:inline-block}
@@ -254,8 +258,14 @@
             <sc-for list="{{ productsHome }}" as="p" hint-placeholder-count="3">
               <article style="background:#fff;border-radius:12px;overflow:hidden;border:1px solid rgba(120,80,95,.08);box-shadow:0 10px 40px -28px rgba(90,61,74,.5);display:flex;flex-direction:column">
                 <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:{{ p.bg }}">
-                  <img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;object-position:{{ p.pos }}">
-                  <span style="position:absolute;top:12px;left:12px;background:rgba(246,238,240,.92);color:#5a3d4a;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:30px">{{ p.tag }}</span>
+                  <div class="carousel">
+                    <img src="{{ p.img }}" alt="{{ p.name }}" style="object-position:{{ p.pos }}">
+                    <sc-if value="{{ p.hasImg2 }}"><img src="{{ p.img2 }}" alt="{{ p.name }}"></sc-if>
+                    <sc-if value="{{ p.hasImg3 }}"><img src="{{ p.img3 }}" alt="{{ p.name }}"></sc-if>
+                    <sc-if value="{{ p.hasImg4 }}"><img src="{{ p.img4 }}" alt="{{ p.name }}"></sc-if>
+                  </div>
+                  <span style="position:absolute;top:12px;left:12px;background:rgba(246,238,240,.92);color:#5a3d4a;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:30px;z-index:2">{{ p.tag }}</span>
+                  <sc-if value="{{ p.hasImg2 }}"><div class="car-hint">↔ deslizá</div></sc-if>
                 </div>
                 <div style="padding:22px 20px 24px;display:flex;flex-direction:column;flex:1">
                   <h3 style="font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;color:#3d2c33;line-height:1.1">{{ p.name }}</h3>
@@ -351,8 +361,14 @@
             <sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
               <article style="background:#fff;border-radius:12px;overflow:hidden;border:1px solid rgba(120,80,95,.08);box-shadow:0 10px 40px -28px rgba(90,61,74,.5);display:flex;flex-direction:column">
                 <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:{{ p.bg }}">
-                  <img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;object-position:{{ p.pos }}">
-                  <span style="position:absolute;top:12px;left:12px;background:rgba(246,238,240,.92);color:#5a3d4a;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:30px">{{ p.tag }}</span>
+                  <div class="carousel">
+                    <img src="{{ p.img }}" alt="{{ p.name }}" style="object-position:{{ p.pos }}">
+                    <sc-if value="{{ p.hasImg2 }}"><img src="{{ p.img2 }}" alt="{{ p.name }}"></sc-if>
+                    <sc-if value="{{ p.hasImg3 }}"><img src="{{ p.img3 }}" alt="{{ p.name }}"></sc-if>
+                    <sc-if value="{{ p.hasImg4 }}"><img src="{{ p.img4 }}" alt="{{ p.name }}"></sc-if>
+                  </div>
+                  <span style="position:absolute;top:12px;left:12px;background:rgba(246,238,240,.92);color:#5a3d4a;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:30px;z-index:2">{{ p.tag }}</span>
+                  <sc-if value="{{ p.hasImg2 }}"><div class="car-hint">↔ deslizá</div></sc-if>
                 </div>
                 <div style="padding:22px 20px 24px;display:flex;flex-direction:column;flex:1">
                   <h3 style="font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;color:#3d2c33;line-height:1.1">{{ p.name }}</h3>
@@ -669,21 +685,16 @@ class Component extends DCLogic {
 
       // ============ SKIN CARE (Medicube) ============
       { name: "Triple Collagen Cream", tag: "Medicube", price: "$38.000", note: "50 ml", desc: "Crema con colágeno triple, niacinamida y elastina hidrolizada. Firmeza y elasticidad.", img: "img/productos/skincare_triple_collagen_cream.webp", bg: "#fbe9ec", pos: "center", category: "skincare" },
-      { name: "Deep Vita C Cream", tag: "Medicube", price: "$42.000", note: "55 g", desc: "Crema cápsula con 50% agua de vitamina + derivados de vit C y niacinamida 5%. Luminosidad.", img: "img/productos/skincare_deep_vita_c_cream.webp", bg: "#f2e6d5", pos: "center", category: "skincare" },
-      { name: "Deep Vita C Cream (box)", tag: "Medicube", price: "$42.000", note: "55 g", desc: "Deep Vita C Capsule Cream con caja original. Antioxidante potente para el día.", img: "img/productos/skincare_deep_vita_c_cream_box.webp", bg: "#f2e6d5", pos: "center", category: "skincare" },
-      { name: "AGE-R Vita C Ampoule", tag: "Serum premium", price: "$48.000", note: "20 ml", desc: "Ampolla con Vitamina C 21%, B5 2% y derivados. Manchas, pecas y opacidad.", img: "img/productos/skincare_age_r_vita_c_ampoule.webp", bg: "#e6d9c0", pos: "center", category: "skincare" },
-      { name: "AGE-R Vita C Bottle", tag: "Serum premium", price: "$48.000", note: "20 ml", desc: "Vita C Pro Ampoule para tratamiento intensivo de melanina. Alta pureza premium.", img: "img/productos/skincare_age_r_vita_c_bottle.webp", bg: "#efe4d0", pos: "center", category: "skincare" },
+      { name: "Deep Vita C Capsule Cream", tag: "Medicube", price: "$42.000", note: "55 g · vit C + niacinamida", desc: "Crema cápsula con 50% agua de vitamina + derivados de vit C y niacinamida 5%. Luminosidad y antioxidante potente para el día.", img: "img/productos/skincare_deep_vita_c_cream.webp", img2: "img/productos/skincare_deep_vita_c_cream_box.webp", bg: "#f2e6d5", pos: "center", category: "skincare" },
+      { name: "AGE-R Vita C Pro Ampoule", tag: "Serum premium", price: "$48.000", note: "20 ml · vit C 21%", desc: "Ampolla con Vitamina C 21%, B5 2% y derivados. Tratamiento intensivo de manchas, pecas y opacidad.", img: "img/productos/skincare_age_r_vita_c_bottle.webp", img2: "img/productos/skincare_age_r_vita_c_ampoule.webp", bg: "#efe4d0", pos: "center", category: "skincare" },
       { name: "Deep Vita C Pad", tag: "Toner pad", price: "$34.000", note: "70 pads", desc: "70 pads exfoliantes con vitamina C y niacinamida 2%. Textura suave y luminosa.", img: "img/productos/skincare_deep_vita_c_pad.webp", bg: "#f4ecd2", pos: "center", category: "skincare" },
-      { name: "AGE-R Glutathione Cream", tag: "Anti-edad", price: "$54.000", note: "50 ml", desc: "Crema con glutatión, colágeno y péptidos. Efecto glow y firmeza.", img: "img/productos/skincare_age_r_glutathione_cream.webp", bg: "#e8dfd0", pos: "center", category: "skincare" },
-      { name: "Glutathione Cream Jar", tag: "Anti-edad", price: "$54.000", note: "50 ml", desc: "AGE-R Glutathione Glow Capsule Cream. Textura ligera con micro cápsulas activas.", img: "img/productos/skincare_age_r_glutathione_jar.webp", bg: "#e8dfd0", pos: "center", category: "skincare" },
-      { name: "Kojic Turmeric Mask", tag: "Máscara", price: "$18.000", note: "1 hoja", desc: "Máscara nocturna kojic acid + cúrcuma. Piel de porcelana en 3-4 hs.", img: "img/productos/skincare_kojic_turmeric_mask_pkg.webp", bg: "#f5ecc9", pos: "center", category: "skincare" },
-      { name: "Deep Vita A Retinol", tag: "Serum", price: "$46.000", note: "30 ml", desc: "Serum con retinol HPR 1% y complejo colágeno 3%. Renovación intensiva.", img: "img/productos/skincare_deep_vita_a_retinol.webp", bg: "#e6d8c4", pos: "center", category: "skincare" },
-      { name: "Vita A Retinol Trio", tag: "Combo", price: "$120.000", note: "3 unidades", desc: "Trío de Deep Vita A Retinol Serum. Ideal para tratamiento continuo.", img: "img/productos/skincare_deep_vita_a_retinol_trio.webp", bg: "#e5d5be", pos: "center", category: "skincare" },
-      { name: "PDRN Pink Exosome Shot", tag: "Regenerador", price: "$56.000", note: "30 ml", desc: "PDRN + colágeno + exosomas. Regeneración celular y firmeza rosa.", img: "img/productos/skincare_pdrn_exosome_bottle.webp", bg: "#f4e2e6", pos: "center", category: "skincare" },
-      { name: "PDRN Exosome (box)", tag: "Regenerador", price: "$56.000", note: "30 ml", desc: "Exosome Shot 7500 con caja. Regeneración profunda y sostenida.", img: "img/productos/skincare_pdrn_exosome_box.webp", bg: "#f6e5e9", pos: "center", category: "skincare" },
-      { name: "PDRN Pink Gel Mask", tag: "Máscara", price: "$18.000", note: "1 hoja", desc: "Máscara gel PDRN con sodium DNA, niacinamida y colágeno hidrolizado.", img: "img/productos/skincare_pdrn_pink_gel_mask.webp", bg: "#f6e5e9", pos: "center", category: "skincare" },
+      { name: "AGE-R Glutathione Glow Cream", tag: "Anti-edad", price: "$54.000", note: "50 ml", desc: "Crema con glutatión, colágeno y péptidos. Efecto glow, firmeza y micro cápsulas activas.", img: "img/productos/skincare_age_r_glutathione_jar.webp", img2: "img/productos/skincare_age_r_glutathione_cream.webp", bg: "#e8dfd0", pos: "center", category: "skincare" },
+      { name: "Kojic Turmeric Brightening Mask", tag: "Máscara", price: "$18.000", note: "28 g · 1 hoja", desc: "Máscara nocturna kojic acid + cúrcuma. Piel de porcelana en 3-4 hs. Efecto glass glow.", img: "img/productos/skincare_kojic_turmeric_mask_pkg.webp", img2: "img/productos/skincare_kojic_turmeric_mask_demo.webp", img3: "img/productos/skincare_key_ingredients_banner.webp", bg: "#f5ecc9", pos: "center", category: "skincare" },
+      { name: "Deep Vita A Retinol Serum", tag: "Serum", price: "$46.000", note: "30 ml", desc: "Serum con retinol HPR 1% y complejo colágeno 3%. Renovación intensiva. Combo trio disponible.", img: "img/productos/skincare_deep_vita_a_retinol.webp", img2: "img/productos/skincare_deep_vita_a_retinol_trio.webp", bg: "#e6d8c4", pos: "center", category: "skincare" },
+      { name: "PDRN Pink Collagen Exosome Shot", tag: "Regenerador", price: "$56.000", note: "30 ml · PDRN 7500", desc: "PDRN + colágeno + exosomas. Regeneración celular y firmeza rosa. Sodium DNA de última generación.", img: "img/productos/skincare_pdrn_exosome_bottle.webp", img2: "img/productos/skincare_pdrn_exosome_box.webp", bg: "#f4e2e6", pos: "center", category: "skincare" },
+      { name: "PDRN Pink Collagen Gel Mask", tag: "Máscara", price: "$18.000", note: "28 g · 1 hoja", desc: "Máscara gel PDRN con sodium DNA, niacinamida y colágeno hidrolizado.", img: "img/productos/skincare_pdrn_pink_gel_mask.webp", bg: "#f6e5e9", pos: "center", category: "skincare" },
       { name: "Triple Deep Erasing Cream", tag: "Anti-manchas", price: "$44.000", note: "todo tipo de piel", desc: "Crema para atenuar manchas y textura irregular. Fórmula intensiva Medicube.", img: "img/productos/skincare_triple_deep_erasing.webp", bg: "#f2d9c9", pos: "center", category: "skincare" },
-      { name: "Red Body Peeling", tag: "Cuerpo", price: "$38.000", note: "110 g", desc: "Peeling corporal con AHA+BHA+PHA+LHA + niacinamida 2%. Textura suave y renovada.", img: "img/productos/skincare_red_body_peeling.webp", bg: "#f3d9d9", pos: "center", category: "skincare" },
+      { name: "Red Body Peeling Cleanser", tag: "Cuerpo", price: "$38.000", note: "110 g", desc: "Peeling corporal con AHA+BHA+PHA+LHA + niacinamida 2%. Textura suave y renovada.", img: "img/productos/skincare_red_body_peeling.webp", bg: "#f3d9d9", pos: "center", category: "skincare" },
 
       // ============ SUPLEMENTOS ============
       { name: "Vitamina K2 + D3", tag: "Huesos", price: "$18.000", note: "30 cápsulas", desc: "K2 100 mcg + D3 4000 UI. Menaquinona-7 para huesos y absorción de calcio. Sin gluten.", img: "img/productos/supl_vitamina_k2_d3.webp", bg: "#ecefe2", pos: "center", category: "suplementos" },
@@ -695,6 +706,12 @@ class Component extends DCLogic {
 
     const allProducts = raw.map(p => ({
       ...p,
+      img2: p.img2 || "",
+      img3: p.img3 || "",
+      img4: p.img4 || "",
+      hasImg2: !!p.img2,
+      hasImg3: !!p.img3,
+      hasImg4: !!p.img4,
       wa: wa(`¡Hola Vane! 💕 Quiero pedir: ${p.name} (${p.price}). ¿Está disponible?`)
     }));
 

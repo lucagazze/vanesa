@@ -18,6 +18,7 @@
   ::selection{background:#d9b8c4;color:#2e2428}
   @keyframes floatup{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
   @keyframes hueshift{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(18deg)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
   @keyframes meshmove{0%{transform:translate(-8%,-6%) rotate(0deg)}50%{transform:translate(6%,4%) rotate(8deg)}100%{transform:translate(-8%,-6%) rotate(0deg)}}
   @keyframes meshmove2{0%{transform:translate(6%,8%) scale(1.1)}50%{transform:translate(-6%,-4%) scale(1.25)}100%{transform:translate(6%,8%) scale(1.1)}}
   @keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-5%,-5%)}30%{transform:translate(3%,-8%)}50%{transform:translate(-7%,4%)}70%{transform:translate(5%,6%)}90%{transform:translate(-3%,-2%)}}
@@ -60,10 +61,49 @@
   .cart-item img{width:70px;height:88px;object-fit:cover;border-radius:8px;background:#f6eef0}
   .cart-item-info h4{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:#3d2c33;line-height:1.2;margin-bottom:4px}
   .cart-item-price{font-size:12.5px;color:#8a7178;margin-bottom:8px}
-  .cart-qty{display:inline-flex;align-items:center;gap:0;border:1px solid rgba(120,80,95,.2);border-radius:20px;overflow:hidden}
-  .cart-qty button{background:transparent;border:none;width:26px;height:26px;font-size:15px;color:#5a3d4a;cursor:pointer;line-height:1;outline:none}
-  .cart-qty button:hover{background:#f6eef0}
-  .cart-qty span{min-width:24px;text-align:center;font-size:13px;font-weight:500;color:#3d2c33}
+  .cart-qty {
+    display:inline-flex;
+    align-items:center;
+    gap:0;
+    border:1px solid rgba(120,80,95,.25);
+    border-radius:24px;
+    overflow:hidden;
+    background:#fdfbfc;
+    width: 78px;
+    height: 28px;
+  }
+  .cart-qty button {
+    background:transparent;
+    border:none;
+    width:26px;
+    height:100%;
+    font-size:14px;
+    font-weight:500;
+    color:#5a3d4a;
+    cursor:pointer;
+    line-height:1;
+    outline:none;
+    transition:background .15s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+  }
+  .cart-qty button:hover {
+    background:#f6eef0;
+  }
+  .cart-qty button:active {
+    background:#e8d9dc;
+    transform:scale(.94);
+  }
+  .cart-qty span {
+    width:26px;
+    text-align:center;
+    font-size:12.5px;
+    font-weight:600;
+    color:#3d2c33;
+    font-variant-numeric:tabular-nums;
+  }
   .cart-remove{background:transparent;border:none;color:#b07d8e;cursor:pointer;font-size:18px;padding:6px;outline:none;align-self:start}
   .cart-remove:hover{color:#cc2b3d}
   .cart-empty{padding:40px 24px;text-align:center;color:#8a7178}
@@ -88,6 +128,123 @@
   .ver-coleccion-btn:hover{background:#5a3d4a !important;color:#fff !important}
   .ver-coleccion-btn:hover svg{color:#fff}
   @media (max-width: 768px){ .cart-drawer{width:100%} }
+  
+  /* Footer responsive */
+  .footer-container {
+    background:#3d2c33;
+    color:#d9b8c4;
+    padding:clamp(40px,6vw,64px) clamp(20px,5vw,64px);
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .footer-links {
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px 24px;
+    font-size:13px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+  }
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      text-align: center;
+      gap: 24px;
+      padding-bottom: 90px; /* Evita que el botón flotante de WhatsApp tape los links */
+    }
+    .footer-links {
+      justify-content: center;
+      gap: 12px 18px;
+    }
+  }
+
+  /* Product Qty Selector (Más Compacto y Fino) */
+  .prod-qty {
+    display:inline-flex;
+    align-items:center;
+    gap:0;
+    border:1px solid rgba(120,80,95,.25);
+    border-radius:24px;
+    overflow:hidden;
+    background:#fdfbfc;
+    width: 78px;
+    height: 30px;
+    flex-shrink: 0;
+  }
+  .prod-qty button {
+    background:transparent;
+    border:none;
+    width:26px;
+    height:100%;
+    font-size:14px;
+    font-weight:500;
+    color:#5a3d4a;
+    cursor:pointer;
+    line-height:1;
+    outline:none;
+    transition:background .15s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+  }
+  .prod-qty button:hover {
+    background:#f6eef0;
+  }
+  .prod-qty button:active {
+    background:#e8d9dc;
+    transform:scale(.94);
+  }
+  .prod-qty span {
+    width:26px;
+    text-align:center;
+    font-size:12.5px;
+    font-weight:600;
+    color:#3d2c33;
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* Botón de Compra Refinado */
+  .add-cart-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 30px;
+    padding: 0 12px;
+    color: #f6eef0;
+    border: none;
+    border-radius: 40px;
+    font-size: 9.5px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .add-cart-btn:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+  .add-cart-btn:active {
+    transform: translateY(0);
+  }
+  .add-cart-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  /* Fly-to-cart animation */
+  .fly-to-cart{position:fixed;z-index:400;background-size:cover;background-position:center;pointer-events:none;box-shadow:0 12px 32px rgba(90,61,74,.35);will-change:transform,top,left,width,height,opacity}
+  @keyframes cartBump{0%{transform:scale(1)}30%{transform:scale(1.35) rotate(-8deg)}60%{transform:scale(.92) rotate(4deg)}100%{transform:scale(1)}}
+  .cart-btn.bump svg{animation:cartBump .55s cubic-bezier(.36,1.6,.6,.9)}
   .car-hint{display:none}
   @media (max-width: 768px){ .car-arrow{width:34px;height:34px;font-size:19px;opacity:.85} }
   
@@ -136,7 +293,7 @@
 <div style="overflow-x:hidden">
 
   <!-- NAV -->
-  <header style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,64px);background:rgba(246,238,240,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(120,80,95,.1)">
+  <header style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,64px);background:rgba(246,238,240,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(120,80,95,.1)">
     <a href="#inicio" style="font-family:'Cormorant Garamond',serif;font-size:26px;letter-spacing:5px;font-weight:600;color:#5a3d4a;white-space:nowrap">VANE - UNA</a>
     
     <!-- Desktop navigation -->
@@ -198,7 +355,7 @@
   <!-- ==================== PAGE: INICIO ==================== -->
   <sc-if value="{{ showInicio }}">
     <!-- HERO (Fondo corregido sin costuras conic-gradient y shimmer blob a pantalla completa) -->
-    <section id="top" style="position:relative;min-height:92vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#241a20;padding:clamp(60px,10vh,120px) clamp(20px,5vw,64px)">
+    <section id="top" style="position:relative;min-height:92vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#241a20;padding:clamp(110px,12vh,150px) clamp(20px,5vw,64px) clamp(60px,10vh,120px)">
       <div style="position:absolute;inset:-20%;animation:hueshift 16s ease-in-out infinite alternate">
         <div style="position:absolute;inset:0;background:radial-gradient(60% 55% at 25% 30%,#f4c9d6 0%,rgba(244,201,214,0) 60%);animation:meshmove 22s ease-in-out infinite"></div>
         <div style="position:absolute;inset:0;background:radial-gradient(55% 50% at 78% 22%,#e7b7d9 0%,rgba(231,183,217,0) 58%);animation:meshmove2 26s ease-in-out infinite"></div>
@@ -350,10 +507,27 @@
                     <span style="font-size:21px;font-weight:500;color:#5a3d4a">{{ p.price }}</span>
                     <span style="font-size:13px;font-weight:300;color:#b8a3aa">{{ p.note }}</span>
                   </div>
-                  <button type="button" onclick="{{ p.addToCart }}" style="margin-top:18px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;background:#5a3d4a;color:#f6eef0;border:none;border-radius:40px;font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;cursor:pointer;transition:all .2s;width:100%">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                    Agregar al carrito
-                  </button>
+                  <div style="display:flex;align-items:center;gap:8px;margin-top:14px;width:100%">
+                    <div class="prod-qty">
+                      <button type="button" onclick="{{ p.decQty }}" aria-label="Quitar uno">−</button>
+                      <span>{{ p.selectedQty }}</span>
+                      <button type="button" onclick="{{ p.incQty }}" aria-label="Sumar uno">+</button>
+                    </div>
+                    <button type="button" class="add-cart-btn" onclick="{{ p.addToCart }}" style="background:{{ p.btnBg }}" disabled="{{ !p.isNormal }}">
+                      <sc-if value="{{ p.isAdding }}">
+                        <svg class="spinner" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><circle cx="12" cy="12" r="10" stroke-dasharray="32" stroke-dashoffset="16"></circle></svg>
+                        <span>Agregando...</span>
+                      </sc-if>
+                      <sc-if value="{{ p.isAdded }}">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>¡Agregado!</span>
+                      </sc-if>
+                      <sc-if value="{{ p.isNormal }}">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                        <span>Agregar</span>
+                      </sc-if>
+                    </button>
+                  </div>
                 </div>
               </article>
             </sc-for>
@@ -386,7 +560,7 @@
 
   <!-- ==================== PAGE: QUIÉNES SOMOS ==================== -->
   <sc-if value="{{ showQuienesSomos }}">
-    <section style="padding:clamp(60px,10vw,120px) clamp(20px,5vw,64px);background:#fff;min-height:75vh;display:flex;align-items:center">
+    <section style="padding:clamp(100px,10vw,120px) clamp(20px,5vw,64px) clamp(60px,10vw,120px);background:#fff;min-height:75vh;display:flex;align-items:center">
       <div class="quienes-grid">
         <div class="rev" style="position:relative">
           <div style="position:absolute;inset:-12px;background:#e9d2dc;border-radius:12px;z-index:0"></div>
@@ -413,7 +587,7 @@
 
   <!-- ==================== PAGE: PRODUCTOS ==================== -->
   <sc-if value="{{ showProductos }}">
-    <section id="capsulas" style="padding:clamp(60px,9vw,110px) clamp(20px,5vw,64px);background:#f6eef0;min-height:75vh">
+    <section id="capsulas" style="padding:clamp(100px,9vw,110px) clamp(20px,5vw,64px) clamp(60px,9vw,110px);background:#f6eef0;min-height:75vh">
       <div style="text-align:center;max-width:600px;margin:0 auto 48px">
         <p style="font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#b07d8e;margin-bottom:14px">Movete, respirá, volvé a vos</p>
         <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(34px,5vw,52px);color:#5a3d4a;line-height:1.02;text-transform:uppercase;letter-spacing:2px">Cápsulas</h2>
@@ -460,10 +634,27 @@
                     <span style="font-size:21px;font-weight:500;color:#5a3d4a">{{ p.price }}</span>
                     <span style="font-size:13px;font-weight:300;color:#b8a3aa">{{ p.note }}</span>
                   </div>
-                  <button type="button" onclick="{{ p.addToCart }}" style="margin-top:18px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;background:#5a3d4a;color:#f6eef0;border:none;border-radius:40px;font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;cursor:pointer;transition:all .2s;width:100%">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                    Agregar al carrito
-                  </button>
+                  <div style="display:flex;align-items:center;gap:8px;margin-top:14px;width:100%">
+                    <div class="prod-qty">
+                      <button type="button" onclick="{{ p.decQty }}" aria-label="Quitar uno">−</button>
+                      <span>{{ p.selectedQty }}</span>
+                      <button type="button" onclick="{{ p.incQty }}" aria-label="Sumar uno">+</button>
+                    </div>
+                    <button type="button" class="add-cart-btn" onclick="{{ p.addToCart }}" style="background:{{ p.btnBg }}" disabled="{{ !p.isNormal }}">
+                      <sc-if value="{{ p.isAdding }}">
+                        <svg class="spinner" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><circle cx="12" cy="12" r="10" stroke-dasharray="32" stroke-dashoffset="16"></circle></svg>
+                        <span>Agregando...</span>
+                      </sc-if>
+                      <sc-if value="{{ p.isAdded }}">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>¡Agregado!</span>
+                      </sc-if>
+                      <sc-if value="{{ p.isNormal }}">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                        <span>Agregar</span>
+                      </sc-if>
+                    </button>
+                  </div>
                 </div>
               </article>
             </sc-for>
@@ -490,7 +681,7 @@
 
   <!-- ==================== PAGE: CONTACTO ==================== -->
   <sc-if value="{{ showContacto }}">
-    <section style="padding:clamp(60px,10vw,120px) clamp(20px,5vw,64px);background:#f6eef0;min-height:75vh;display:flex;align-items:center">
+    <section style="padding:clamp(100px,10vw,120px) clamp(20px,5vw,64px) clamp(60px,10vw,120px);background:#f6eef0;min-height:75vh;display:flex;align-items:center">
       <div style="max-width:760px;margin:0 auto;width:100%" class="rev">
         <div style="text-align:center;margin-bottom:48px">
           <p style="font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#b07d8e;margin-bottom:14px">Conectemos</p>
@@ -639,12 +830,12 @@
   </sc-if>
 
   <!-- FOOTER -->
-  <footer style="background:#3d2c33;color:#d9b8c4;padding:clamp(40px,6vw,64px) clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:center">
+  <footer class="footer-container">
     <div>
       <div style="font-family:'Cormorant Garamond',serif;font-size:28px;letter-spacing:5px;color:#fff">VANE - UNA</div>
       <p style="font-size:13px;font-weight:300;margin-top:6px;color:#b794a4">Indumentaria & yoga · hecho con amor</p>
     </div>
-    <div style="display:flex;gap:24px;font-size:13px;letter-spacing:1px;text-transform:uppercase">
+    <div class="footer-links">
       <a href="#inicio">Inicio</a>
       <a href="#quienes-somos">Quién soy</a>
       <a href="#productos">Productos</a>
@@ -687,6 +878,8 @@
         try { c.scrollTo({left: target, behavior:'smooth'}); } catch(_){ c.scrollLeft = target; }
         setTimeout(function(){ if(Math.abs(c.scrollLeft - target) > 4) c.scrollLeft = target; }, 400);
       }
+
+
       document.addEventListener('click', handleArrow, true);
       document.addEventListener('pointerdown', function(e){
         if(e.target.closest && e.target.closest('.car-arrow')){ e.stopPropagation(); }
@@ -776,6 +969,9 @@ class Component extends DCLogic {
       mobileMenuOpen: false,
       cartOpen: false,
       cart: Array.isArray(savedCart) ? savedCart : [],
+      quantities: {},
+      addingProduct: null,
+      addedProduct: null,
       toast: '',
       faq1: false,
       faq2: false,
@@ -970,14 +1166,28 @@ class Component extends DCLogic {
     const closeCart = () => { lockBody(false); this.setState({ cartOpen: false }); };
     const toggleCart = () => { const willOpen = !this.state.cartOpen; lockBody(willOpen); this.setState({ cartOpen: willOpen }); };
 
-    const addItem = (product) => {
-      const c = (this.state.cart || []).map(x => ({ ...x }));
-      const found = c.find(i => i.name === product.name);
-      if (found) { found.qty = (found.qty || 0) + 1; }
-      else { c.push({ name: product.name, price: product.price, img: product.img, qty: 1 }); }
-      this._saveCart(c);
-      lockBody(true);
-      this.setState({ cart: c, cartOpen: true });
+    const addItem = (product, quantityToAdd = 1) => {
+      this.setState({ addingProduct: product.name });
+
+      setTimeout(() => {
+        const c = (this.state.cart || []).map(x => ({ ...x }));
+        const found = c.find(i => i.name === product.name);
+        if (found) { found.qty = (found.qty || 0) + quantityToAdd; }
+        else { c.push({ name: product.name, price: product.price, img: product.img, qty: quantityToAdd }); }
+        this._saveCart(c);
+        
+        this.setState({
+          cart: c,
+          quantities: { ...this.state.quantities, [product.name]: 1 },
+          addingProduct: null,
+          addedProduct: product.name
+        });
+
+        setTimeout(() => {
+          this.setState({ addedProduct: null });
+          openCart();
+        }, 400);
+      }, 600);
     };
     const incItem = (name) => {
       const c = (this.state.cart || []).map(x => ({ ...x }));
@@ -1028,6 +1238,13 @@ class Component extends DCLogic {
       const img3 = p.img3 || "";
       const img4 = p.img4 || "";
       const imgCount = 1 + (img2?1:0) + (img3?1:0) + (img4?1:0);
+      const selectedQty = this.state.quantities[p.name] || 1;
+      
+      const isAdding = this.state.addingProduct === p.name;
+      const isAdded = this.state.addedProduct === p.name;
+      const isNormal = !isAdding && !isAdded;
+      const btnBg = isAdded ? '#25804f' : '#5a3d4a';
+
       return {
         ...p,
         img2, img3, img4,
@@ -1035,7 +1252,27 @@ class Component extends DCLogic {
         hasImg3: !!img3,
         hasImg4: !!img4,
         imgCount,
-        addToCart: () => addItem(p),
+        selectedQty,
+        isAdding,
+        isAdded,
+        isNormal,
+        btnBg,
+        incQty: () => {
+          if (!isNormal) return;
+          const qty = (this.state.quantities[p.name] || 1) + 1;
+          this.setState({ quantities: { ...this.state.quantities, [p.name]: qty } });
+        },
+        decQty: () => {
+          if (!isNormal) return;
+          const current = this.state.quantities[p.name] || 1;
+          if (current > 1) {
+            const qty = current - 1;
+            this.setState({ quantities: { ...this.state.quantities, [p.name]: qty } });
+          }
+        },
+        addToCart: () => {
+          if (isNormal) addItem(p, selectedQty);
+        },
         wa: wa(`¡Hola Vane! 💕 Quiero pedir: ${p.name} (${p.price}). ¿Está disponible?`)
       };
     });
